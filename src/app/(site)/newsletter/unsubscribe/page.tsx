@@ -14,7 +14,7 @@ export default async function UnsubscribePage({ searchParams }: Props) {
   const token = (Array.isArray(sp.token) ? sp.token[0] : sp.token) ?? "";
   return (
     <div className="container-page flex min-h-[50vh] max-w-xl flex-col justify-center py-20">
-      <h1 className="display text-[2.25rem] text-navy-900">Unsubscribe from our newsletter</h1>
+      <h1 className="display text-[2.25rem] text-heading">Unsubscribe from our newsletter</h1>
       <p className="mt-3 text-slate">Press the button to stop receiving property updates by email.</p>
       <div className="mt-6">
         <UnsubscribeForm token={token} />

@@ -41,7 +41,7 @@ export function ResultsToolbar({ total, sort, view, from, to }: { total: number;
           id="sort"
           value={sort}
           onChange={(e) => update("sort", e.target.value === "newest" ? null : e.target.value)}
-          className="h-10 rounded-[var(--radius-control)] border border-line bg-white px-3 text-sm"
+          className="h-10 rounded-[var(--radius-control)] border border-line bg-surface px-3 text-sm"
         >
           {SORT_OPTIONS.map((o) => (
             <option key={o.value} value={o.value}>
@@ -49,7 +49,7 @@ export function ResultsToolbar({ total, sort, view, from, to }: { total: number;
             </option>
           ))}
         </select>
-        <div className="hidden rounded-[var(--radius-control)] border border-line bg-white p-0.5 sm:flex" role="group" aria-label="Display mode">
+        <div className="hidden rounded-[var(--radius-control)] border border-line bg-surface p-0.5 sm:flex" role="group" aria-label="Display mode">
           {(["grid", "list"] as const).map((v) => {
             const Icon = v === "grid" ? LayoutGrid : List;
             return (

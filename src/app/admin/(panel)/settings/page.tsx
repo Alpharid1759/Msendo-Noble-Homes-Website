@@ -52,11 +52,12 @@ const SECTIONS: { key: string; title: string; description?: string; fields: Fiel
   },
   {
     key: "brand",
-    title: "Logo",
-    description: "Until a logo is uploaded, the site uses the temporary MSENDO NOBLE HOMES wordmark.",
+    title: "Logo and hero image",
+    description: "The site uses the Msendo Noble Homes mark and wordmark by default. Upload alternative logo files only if you need to replace them. The hero image is the large photograph behind the home page headline: use a real, high-quality landscape photo (at least 2400 px wide) of a property you have the rights to use.",
     fields: [
-      { name: "logo_url", label: "Full-colour logo (for light backgrounds)", type: "image" },
-      { name: "logo_white_url", label: "White logo (for dark backgrounds)", type: "image" },
+      { name: "hero_image_url", label: "Home page hero photograph", type: "image", full: true },
+      { name: "logo_url", label: "Alternative logo for light backgrounds", type: "image" },
+      { name: "logo_white_url", label: "Alternative logo for the dark website header and footer", type: "image" },
     ],
   },
   {
@@ -88,10 +89,14 @@ const SECTIONS: { key: string; title: string; description?: string; fields: Fiel
   },
   {
     key: "inspections",
-    title: "Inspection booking rules",
+    title: "Opening and inspection hours",
+    description: "Used for inspection booking times and for opening hours shown to search engines. Update the business hours text under Contact details to match.",
     fields: [
-      { name: "earliest_hour", label: "Earliest start hour (24h)", type: "number" },
-      { name: "latest_hour", label: "Latest finish hour (24h)", type: "number" },
+      { name: "earliest_hour", label: "Monday to Friday: opening hour (24h)", type: "number" },
+      { name: "latest_hour", label: "Monday to Friday: closing hour (24h)", type: "number" },
+      { name: "saturday_earliest_hour", label: "Saturday: opening hour (24h)", type: "number" },
+      { name: "saturday_latest_hour", label: "Saturday: closing hour (24h)", type: "number" },
+      { name: "allow_saturdays", label: "Allow Saturday inspections", type: "checkbox" },
       { name: "slot_minutes", label: "Default inspection length (minutes)", type: "number" },
       { name: "min_notice_hours", label: "Minimum notice (hours)", type: "number" },
       { name: "max_days_ahead", label: "Bookable up to (days ahead)", type: "number" },

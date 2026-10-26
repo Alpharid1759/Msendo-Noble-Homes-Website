@@ -25,10 +25,10 @@ export const DEFAULT_SETTINGS: SiteSettings = {
     state: "Federal Capital Territory",
     country: "Nigeria",
     maps_url: "https://www.google.com/maps/search/?api=1&query=Plot+833+Emmanuel+Aguna+Jabi+Abuja",
-    business_hours: null,
+    business_hours: "Monday to Friday, 7:00am to 5:00pm. Saturday, 10:00am to 4:00pm. Closed on Sundays.",
   },
   social: { facebook: null, instagram: null, x: null, linkedin: null, youtube: null, tiktok: null },
-  brand: { logo_url: null, logo_white_url: null },
+  brand: { logo_url: null, logo_white_url: null, hero_image_url: null },
   seo: {
     default_title: "Msendo Noble Homes | Property for Sale and Rent in Abuja",
     default_description:
@@ -45,8 +45,11 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   testimonials: { items: [] },
   inspections: {
     slot_minutes: 60,
-    earliest_hour: 9,
+    earliest_hour: 7,
     latest_hour: 17,
+    allow_saturdays: true,
+    saturday_earliest_hour: 10,
+    saturday_latest_hour: 16,
     min_notice_hours: 24,
     max_days_ahead: 60,
     allow_sundays: false,

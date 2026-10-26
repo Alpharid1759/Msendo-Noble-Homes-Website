@@ -27,7 +27,7 @@ export default function ListYourPropertyPage() {
         intro={<p>For owners, landlords and developers in Abuja. Nothing is published until our team has reviewed it with you.</p>}
       />
       <div className="container-page grid gap-12 py-14 lg:grid-cols-[minmax(0,1fr)_20rem]">
-        <section className="rounded-[var(--radius-card)] border border-line bg-white p-6 md:p-10" aria-label="Property submission form">
+        <section className="rounded-[var(--radius-card)] border border-line bg-surface p-6 md:p-10" aria-label="Property submission form">
           <ListPropertyForm />
         </section>
         <aside>

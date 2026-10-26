@@ -9,8 +9,8 @@ Date: 26 October 2026. Build: Next.js 16.4.3, React 19.3, Node 22.
 | Database: migrations, seed, triggers, RLS (in-process Postgres) | 16 | Passed |
 | Search filters, URL building | 7 | Passed |
 | Price/area formatting, slugs, WhatsApp/tel/mailto links, CSV safety | 10 | Passed |
-| Inspection rules, form validation, admin validation, HTML sanitising, image processing, MP4 detection | 13 | Passed |
-| **Total** | **46** | **All passed** |
+| Inspection rules, form validation, admin validation, HTML sanitising, image processing, MP4 detection | 14 | Passed |
+| **Total** | **47** | **All passed** |
 
 `npm run lint`, `npm run typecheck` and `npm run build` complete with no errors or warnings.
 

@@ -96,13 +96,13 @@ export function ConsentCheckbox({ state, purpose }: { state: FormState; purpose:
           type="checkbox"
           name="consent"
           required
-          className="mt-1 h-4 w-4 shrink-0 accent-navy-800"
+          className="mt-1 h-4 w-4 shrink-0 accent-gold"
           aria-invalid={error ? true : undefined}
           aria-describedby={error ? "consent-error" : undefined}
         />
         <span>
           I agree that Msendo Noble Homes may use these details to {purpose}, as described in the{" "}
-          <Link href="/legal/privacy" className="font-semibold text-navy-700 underline underline-offset-2">
+          <Link href="/legal/privacy" className="font-semibold text-accent underline underline-offset-2">
             privacy policy
           </Link>
           .
@@ -142,7 +142,7 @@ export function FormMessage({ state }: { state: FormState }) {
       role={state.status === "error" ? "alert" : "status"}
       className={clsx(
         "rounded-[var(--radius-control)] border px-4 py-3 text-sm",
-        state.status === "error" ? "border-danger/30 bg-[#fbeeed] text-danger" : "border-success/30 bg-[#e9f4ee] text-success",
+        state.status === "error" ? "border-danger/30 bg-danger/10 text-danger" : "border-success/30 bg-success/10 text-success",
       )}
     >
       {state.message}

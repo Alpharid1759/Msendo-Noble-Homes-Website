@@ -83,7 +83,7 @@ export default async function InspectionsPage({ searchParams }: Props) {
           </thead>
           <tbody>
             {rows.map((r) => (
-              <tr key={r.id} className={r.status === "requested" ? "bg-[#fffaf0]" : "hover:bg-ivory"}>
+              <tr key={r.id} className={r.status === "requested" ? "bg-gold/5" : "hover:bg-ivory"}>
                 <Td>
                   <Link href={`/admin/inspections/${r.id}`} className="font-semibold text-navy-900 hover:underline">
                     {r.full_name}

@@ -28,14 +28,14 @@ export function PhotoGalleryGrid({ items }: { items: GalleryItem[] }) {
           const thumbs = item.images.slice(0, 4);
           return (
             <li key={p.id}>
-              <article className="flex h-full flex-col overflow-hidden rounded-[var(--radius-card)] border border-line bg-white">
-                <div className="grid grid-cols-3 grid-rows-2 gap-1 p-1">
+              <article className="flex h-full flex-col overflow-hidden rounded-[var(--radius-card)] border border-line bg-surface">
+                <div className={`grid gap-1 p-1 ${thumbs.length >= 3 ? "grid-cols-3 grid-rows-2" : thumbs.length === 2 ? "grid-cols-2" : "grid-cols-1"}`}>
                   {thumbs.map((img, i) => (
                     <button
                       key={img.id}
                       type="button"
                       onClick={() => setOpen({ item: idx, image: i })}
-                      className={`relative overflow-hidden rounded-[3px] bg-sand ${i === 0 ? "col-span-2 row-span-2 aspect-[4/3]" : "aspect-[4/3]"}`}
+                      className={`relative overflow-hidden rounded-[3px] bg-sand ${i === 0 && thumbs.length >= 3 ? "col-span-2 row-span-2 aspect-[4/3]" : "aspect-[4/3]"}`}
                     >
                       <PropertyImage variants={img.variants} alt={img.alt} preferred={i === 0 ? 800 : 400} sizes={i === 0 ? "(min-width: 1024px) 22vw, 66vw" : "15vw"} className="h-full w-full transition-transform duration-500 hover:scale-105" />
                       <span className="sr-only">
@@ -64,7 +64,7 @@ export function PhotoGalleryGrid({ items }: { items: GalleryItem[] }) {
                   <div className="flex-1" />
                   <div className="mt-4 flex items-center justify-between gap-3 text-sm">
                     <span className="text-slate">Ref {p.reference}</span>
-                    <button type="button" onClick={() => setOpen({ item: idx, image: 0 })} className="inline-flex items-center gap-1.5 font-semibold text-navy-700 hover:underline">
+                    <button type="button" onClick={() => setOpen({ item: idx, image: 0 })} className="inline-flex items-center gap-1.5 font-semibold text-accent hover:underline">
                       <Camera className="h-4 w-4" aria-hidden="true" />
                       {item.images.length} photo{item.images.length === 1 ? "" : "s"}
                     </button>

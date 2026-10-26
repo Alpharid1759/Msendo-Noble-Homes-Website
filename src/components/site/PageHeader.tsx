@@ -14,12 +14,13 @@ export function PageHeader({
   children?: ReactNode;
 }) {
   return (
-    <section className="on-dark relative overflow-hidden bg-navy-900 text-white">
+    <section className="on-dark relative -mt-[5.25rem] overflow-hidden border-b border-gold/15 bg-navy-900 text-white">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_0%,#1d3a2b_0%,transparent_60%)]" aria-hidden="true" />
       <BlueprintLines className="pointer-events-none absolute -right-24 top-0 h-full w-[44rem] opacity-[0.12]" />
-      <div className="container-page relative py-12 md:py-16">
+      <div className="container-page relative pb-12 pt-32 md:pb-16 md:pt-36">
         <Breadcrumbs items={crumbs} tone="light" />
-        <h1 className="display mt-5 max-w-3xl text-[2.25rem] md:text-[3.25rem]">{title}</h1>
-        {intro && <div className="mt-4 max-w-2xl text-[1.0625rem] leading-relaxed text-navy-100">{intro}</div>}
+        <h1 className="display mt-5 max-w-3xl text-[2.25rem] text-[#f6f1e6] md:text-[3.25rem]">{title}</h1>
+        {intro && <div className="mt-4 max-w-2xl text-[1.0625rem] leading-relaxed text-[#d9d4c8]">{intro}</div>}
         {children && <div className="mt-8">{children}</div>}
       </div>
     </section>

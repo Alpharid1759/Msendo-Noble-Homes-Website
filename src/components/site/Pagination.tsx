@@ -16,7 +16,7 @@ export function Pagination({ page, pageCount, hrefFor }: { page: number; pageCou
   return (
     <nav aria-label="Pagination" className="mt-12 flex items-center justify-center gap-1.5">
       {page > 1 ? (
-        <Link href={hrefFor(page - 1)} className={clsx(linkCls, "text-navy-800 hover:bg-sand")} rel="prev">
+        <Link href={hrefFor(page - 1)} className={clsx(linkCls, "text-accent hover:bg-sand")} rel="prev">
           <ChevronLeft className="h-4 w-4" aria-hidden="true" />
           <span className="sr-only sm:not-sr-only">Previous</span>
         </Link>
@@ -32,7 +32,7 @@ export function Pagination({ page, pageCount, hrefFor }: { page: number; pageCou
               <Link
                 href={hrefFor(it)}
                 aria-current={it === page ? "page" : undefined}
-                className={clsx(linkCls, it === page ? "bg-navy-800 text-white" : "text-navy-800 hover:bg-sand")}
+                className={clsx(linkCls, it === page ? "bg-navy-800 text-white" : "text-accent hover:bg-sand")}
               >
                 <span className="sr-only">Page </span>
                 {it}
@@ -42,7 +42,7 @@ export function Pagination({ page, pageCount, hrefFor }: { page: number; pageCou
         )}
       </ul>
       {page < pageCount ? (
-        <Link href={hrefFor(page + 1)} className={clsx(linkCls, "text-navy-800 hover:bg-sand")} rel="next">
+        <Link href={hrefFor(page + 1)} className={clsx(linkCls, "text-accent hover:bg-sand")} rel="next">
           <span className="sr-only sm:not-sr-only">Next</span>
           <ChevronRight className="h-4 w-4" aria-hidden="true" />
         </Link>

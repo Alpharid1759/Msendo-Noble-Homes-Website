@@ -11,7 +11,7 @@ export interface Crumb {
 
 export function Breadcrumbs({ items, tone = "dark" }: { items: Crumb[]; tone?: "dark" | "light" }) {
   const all: Crumb[] = [{ label: "Home", href: "/" }, ...items];
-  const muted = tone === "dark" ? "text-slate hover:text-navy-900" : "text-navy-200 hover:text-white";
+  const muted = tone === "dark" ? "text-slate hover:text-heading" : "text-navy-200 hover:text-white";
   const current = tone === "dark" ? "text-charcoal" : "text-white";
   return (
     <>
@@ -30,7 +30,7 @@ export function Breadcrumbs({ items, tone = "dark" }: { items: Crumb[]; tone?: "
                     {c.label}
                   </span>
                 )}
-                {!last && <ChevronRight className={`h-3.5 w-3.5 ${tone === "dark" ? "text-navy-200" : "text-navy-600"}`} aria-hidden="true" />}
+                {!last && <ChevronRight className={`h-3.5 w-3.5 ${tone === "dark" ? "text-navy-200" : "text-gold"}`} aria-hidden="true" />}
               </li>
             );
           })}

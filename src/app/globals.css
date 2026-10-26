@@ -2,21 +2,25 @@
 @import "tailwindcss";
 
 @theme {
-  --color-navy-950: #0a1524;
-  --color-navy-900: #0f1d30;
-  --color-navy-800: #13233a;
-  --color-navy-700: #1c3150;
-  --color-navy-600: #2a4468;
-  --color-navy-200: #b9c3d1;
-  --color-navy-100: #dfe5ee;
-  --color-ivory: #f8f5ee;
-  --color-sand: #efe9dc;
-  --color-line: #e3dccd;
-  --color-gold: #c2a46d;
-  --color-gold-soft: #e8dcc2;
-  --color-gold-ink: #7a5c25;
-  --color-charcoal: #1f252d;
-  --color-slate: #5b6573;
+  --color-navy-950: #022a18;
+  --color-navy-900: #033d23;
+  --color-navy-800: #015e36;
+  --color-navy-700: #0b7044;
+  --color-navy-600: #188a56;
+  --color-navy-200: #b7cfc2;
+  --color-navy-100: #e2eee7;
+  --color-ivory: #f8f7f2;
+  --color-surface: #ffffff;
+  --color-sand: #efede5;
+  --color-line: #e2ded2;
+  --color-gold: #e6a20c;
+  --color-gold-light: #f0bd45;
+  --color-gold-soft: #f6e3b5;
+  --color-gold-ink: #8a5f00;
+  --color-charcoal: #24252c;
+  --color-slate: #5a5d66;
+  --color-heading: #033d23;
+  --color-accent: #015e36;
   --color-success: #1f6b4a;
   --color-danger: #a3312a;
   --color-warning: #8a5a00;
@@ -24,10 +28,34 @@
   --font-sans: var(--font-manrope), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   --font-serif: var(--font-newsreader), ui-serif, Georgia, "Times New Roman", serif;
 
-  --radius-card: 6px;
-  --radius-control: 4px;
+  --radius-card: 10px;
+  --radius-control: 6px;
 
-  --shadow-lift: 0 1px 2px rgb(15 29 48 / 0.06), 0 8px 24px -12px rgb(15 29 48 / 0.18);
+  --shadow-lift: 0 1px 2px rgb(2 42 24 / 0.08), 0 12px 32px -14px rgb(2 42 24 / 0.28);
+}
+
+.site-dark {
+  --color-navy-950: #050706;
+  --color-navy-900: #0a0d0b;
+  --color-navy-200: #9aa59f;
+  --color-navy-100: #dbe3de;
+  --color-ivory: #0e1210;
+  --color-surface: #161c19;
+  --color-sand: #1f2722;
+  --color-line: #2b342f;
+  --color-gold-soft: #3a3016;
+  --color-gold-ink: #f0bd45;
+  --color-charcoal: #f1ece1;
+  --color-slate: #aba9a0;
+  --color-heading: #f6f1e6;
+  --color-accent: #f0bd45;
+  --color-success: #6fcf9d;
+  --color-danger: #f08b82;
+  --color-warning: #f0bd45;
+  --shadow-lift: 0 1px 2px rgb(0 0 0 / 0.4), 0 18px 40px -16px rgb(0 0 0 / 0.7);
+  background: var(--color-ivory);
+  color: var(--color-charcoal);
+  color-scheme: dark;
 }
 
 @layer base {
@@ -100,6 +128,18 @@
     }
   }
 
+  .glass {
+    background: color-mix(in srgb, var(--color-surface) 62%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-gold) 22%, transparent);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+  }
+
+  .gold-frame {
+    border: 1px solid color-mix(in srgb, var(--color-gold) 28%, transparent);
+    background: linear-gradient(180deg, color-mix(in srgb, var(--color-gold) 9%, var(--color-surface)) 0%, var(--color-surface) 55%);
+  }
+
   .display {
     font-family: var(--font-serif);
     font-weight: 400;
@@ -120,7 +160,7 @@
     min-height: 2.75rem;
     border: 1px solid var(--color-line);
     border-radius: var(--radius-control);
-    background: #fff;
+    background: var(--color-surface);
     padding: 0.625rem 0.75rem;
     font-size: 1rem;
     color: var(--color-charcoal);
@@ -133,8 +173,8 @@
 
   .field-input:focus {
     outline: none;
-    border-color: var(--color-navy-700);
-    box-shadow: 0 0 0 3px rgb(28 49 80 / 0.15);
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 25%, transparent);
   }
 
   .field-input[aria-invalid="true"] {
@@ -168,7 +208,7 @@
     font-size: 1.75rem;
     line-height: 1.2;
     margin-top: 2em;
-    color: var(--color-navy-900);
+    color: var(--color-heading);
     scroll-margin-top: 6rem;
   }
 
@@ -176,12 +216,12 @@
     font-size: 1.2rem;
     font-weight: 700;
     margin-top: 1.6em;
-    color: var(--color-navy-900);
+    color: var(--color-heading);
     scroll-margin-top: 6rem;
   }
 
   .prose-article a {
-    color: var(--color-navy-700);
+    color: var(--color-accent);
     text-decoration: underline;
     text-underline-offset: 3px;
   }

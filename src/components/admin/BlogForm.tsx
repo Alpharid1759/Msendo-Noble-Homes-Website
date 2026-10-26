@@ -62,7 +62,7 @@ export function BlogForm({
       {post && <input type="hidden" name="id" value={post.id} />}
       <div className="min-w-0 space-y-5">
         {state.status !== "idle" && state.message && (
-          <p role={state.status === "error" ? "alert" : "status"} className={clsx("rounded-[var(--radius-control)] px-4 py-3 text-sm", state.status === "error" ? "bg-[#fbeeed] text-danger" : "bg-[#e9f4ee] text-success")}>
+          <p role={state.status === "error" ? "alert" : "status"} className={clsx("rounded-[var(--radius-control)] px-4 py-3 text-sm", state.status === "error" ? "bg-danger/10 text-danger" : "bg-success/10 text-success")}>
             {state.message}
           </p>
         )}

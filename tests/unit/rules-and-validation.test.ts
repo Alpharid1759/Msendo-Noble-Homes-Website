@@ -7,7 +7,7 @@ import { propertySchema } from "@/lib/validation/admin";
 import { enquirySchema, inspectionSchema } from "@/lib/validation/public-forms";
 import sharp from "sharp";
 
-const rules = { slot_minutes: 60, earliest_hour: 9, latest_hour: 17, min_notice_hours: 24, max_days_ahead: 60, allow_sundays: false };
+const rules = { slot_minutes: 60, earliest_hour: 7, latest_hour: 17, allow_saturdays: true, saturday_earliest_hour: 10, saturday_latest_hour: 16, min_notice_hours: 24, max_days_ahead: 60, allow_sundays: false };
 const now = new Date("2026-10-26T12:00:00+01:00");
 
 describe("inspection rules", () => {
@@ -17,7 +17,8 @@ describe("inspection rules", () => {
   it("rejects short notice, Sundays, out-of-hours and far-future slots", () => {
     expect(validateInspectionSlot(toLagosDate("2026-10-26", "15:00"), rules, now)).toMatch(/24 hours/);
     expect(validateInspectionSlot(toLagosDate("2026-11-01", "10:00"), rules, now)).toMatch(/Sundays/);
-    expect(validateInspectionSlot(toLagosDate("2026-10-28", "16:30"), rules, now)).toMatch(/between 9am and 5pm/);
+    expect(validateInspectionSlot(toLagosDate("2026-10-28", "16:30"), rules, now)).toMatch(/7:00am to 5:00pm/);
+    expect(validateInspectionSlot(toLagosDate("2026-10-28", "06:30"), rules, now)).toMatch(/7:00am/);
     expect(validateInspectionSlot(toLagosDate("2027-03-01", "10:00"), rules, now)).toMatch(/60 days/);
   });
   it("converts to and from Abuja time", () => {
@@ -25,10 +26,17 @@ describe("inspection rules", () => {
     expect(d.toISOString()).toBe("2026-10-28T08:30:00.000Z");
     expect(lagosParts(d)).toMatchObject({ date: "2026-10-28", time: "09:30", day: 3 });
   });
-  it("offers half-hour start times that finish by closing", () => {
-    const opts = timeOptions(rules);
-    expect(opts[0].value).toBe("09:00");
-    expect(opts[opts.length - 1].value).toBe("16:00");
+  it("uses Saturday hours on Saturdays", () => {
+    expect(validateInspectionSlot(toLagosDate("2026-10-31", "10:00"), rules, now)).toBeNull();
+    expect(validateInspectionSlot(toLagosDate("2026-10-31", "09:00"), rules, now)).toMatch(/10:00am to 4:00pm/);
+    expect(validateInspectionSlot(toLagosDate("2026-10-31", "10:00"), { ...rules, allow_saturdays: false }, now)).toMatch(/Saturdays/);
+  });
+  it("offers half-hour start times that finish by closing for the chosen day", () => {
+    const weekday = timeOptions(rules, "2026-10-28");
+    expect([weekday[0].value, weekday[weekday.length - 1].value]).toEqual(["07:00", "16:00"]);
+    const saturday = timeOptions(rules, "2026-10-31");
+    expect([saturday[0].value, saturday[saturday.length - 1].value]).toEqual(["10:00", "15:00"]);
+    expect(timeOptions(rules, "2026-11-01")).toEqual([]);
   });
 });
 

@@ -61,7 +61,7 @@ export default async function LegalPage({ params }: Props) {
           <ul className="space-y-2 text-sm">
             {FOOTER_LINKS.legal.map((l) => (
               <li key={l.href}>
-                <Link href={l.href} aria-current={l.href.endsWith(doc.slug) ? "page" : undefined} className="font-semibold text-navy-700 hover:underline aria-[current=page]:text-charcoal">
+                <Link href={l.href} aria-current={l.href.endsWith(doc.slug) ? "page" : undefined} className="font-semibold text-accent hover:underline aria-[current=page]:text-charcoal">
                   {l.label}
                 </Link>
               </li>

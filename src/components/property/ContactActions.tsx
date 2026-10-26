@@ -30,16 +30,16 @@ export function ContactActions({ property, settings, pageUrl }: { property: Publ
           Book an inspection
         </a>
       )}
-      <a href="#enquire" data-track="enquiry_cta_click" data-track-ref={property.reference} className={`${row} border border-navy-800 text-navy-800 hover:bg-navy-100`}>
+      <a href="#enquire" data-track="enquiry_cta_click" data-track-ref={property.reference} className={`${row} border border-accent text-accent hover:bg-sand`}>
         <MessageSquareText className="h-5 w-5" aria-hidden="true" />
         Enquire about this property
       </a>
       <div className="grid grid-cols-2 gap-2.5">
-        <a href={telUrl(settings.contact.phone)} data-track="phone_click" data-track-ref={property.reference} className={`${row} border border-line bg-white text-navy-800 hover:bg-sand`}>
+        <a href={telUrl(settings.contact.phone)} data-track="phone_click" data-track-ref={property.reference} className={`${row} border border-line bg-surface text-accent hover:bg-sand`}>
           <Phone className="h-4 w-4" aria-hidden="true" />
           Call an agent
         </a>
-        <a href={mailtoUrl(settings.contact.email, subject, body)} data-track="email_click" data-track-ref={property.reference} className={`${row} border border-line bg-white text-navy-800 hover:bg-sand`}>
+        <a href={mailtoUrl(settings.contact.email, subject, body)} data-track="email_click" data-track-ref={property.reference} className={`${row} border border-line bg-surface text-accent hover:bg-sand`}>
           <Mail className="h-4 w-4" aria-hidden="true" />
           Send an email
         </a>

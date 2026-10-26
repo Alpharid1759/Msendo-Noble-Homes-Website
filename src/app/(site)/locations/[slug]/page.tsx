@@ -60,7 +60,7 @@ export default async function LocationPage({ params }: Props) {
       <div className="container-page space-y-16 py-14">
         {sale.items.length > 0 && (
           <section aria-labelledby="sale">
-            <h2 id="sale" className="display text-[2rem] text-navy-900">
+            <h2 id="sale" className="display text-[2rem] text-heading">
               For sale in {location.name}
             </h2>
             <div className="mt-6">
@@ -70,7 +70,7 @@ export default async function LocationPage({ params }: Props) {
         )}
         {rent.items.length > 0 && (
           <section aria-labelledby="rent">
-            <h2 id="rent" className="display text-[2rem] text-navy-900">
+            <h2 id="rent" className="display text-[2rem] text-heading">
               For rent in {location.name}
             </h2>
             <div className="mt-6">
@@ -79,7 +79,7 @@ export default async function LocationPage({ params }: Props) {
           </section>
         )}
         {sale.items.length === 0 && rent.items.length === 0 && (
-          <div className="rounded-[var(--radius-card)] border border-dashed border-navy-200 bg-white p-10 text-center">
+          <div className="rounded-[var(--radius-card)] border border-dashed border-navy-200 bg-surface p-10 text-center">
             <h2 className="text-lg font-semibold">No published listings in {location.name} right now</h2>
             <p className="mx-auto mt-2 max-w-md text-slate">We often hear about properties before they are listed. Tell us what you need.</p>
             <div className="mt-6">
@@ -89,7 +89,7 @@ export default async function LocationPage({ params }: Props) {
         )}
         <p className="text-sm text-slate">
           Looking elsewhere in Abuja?{" "}
-          <Link href="/properties" className="font-semibold text-navy-700 underline underline-offset-2">
+          <Link href="/properties" className="font-semibold text-accent underline underline-offset-2">
             Search all areas
           </Link>
           .

@@ -29,9 +29,9 @@ export default async function ScheduleInspectionPage({ searchParams }: Props) {
         intro={<p>Choose a preferred time. This sends a request; a member of our team will call to confirm before you travel.</p>}
       />
       <div className="container-page grid gap-12 py-14 lg:grid-cols-[minmax(0,1fr)_22rem]">
-        <section className="rounded-[var(--radius-card)] border border-line bg-white p-6 md:p-10" aria-label="Inspection request form">
+        <section className="rounded-[var(--radius-card)] border border-line bg-surface p-6 md:p-10" aria-label="Inspection request form">
           {ref && !property && (
-            <p role="alert" className="mb-6 rounded-[var(--radius-control)] border border-warning/30 bg-[#fff6e5] px-4 py-3 text-sm text-warning">
+            <p role="alert" className="mb-6 rounded-[var(--radius-control)] border border-warning/30 bg-warning/10 px-4 py-3 text-sm text-warning">
               We could not find an available property with reference {ref}. Check the reference, or{" "}
               <Link href="/properties" className="font-semibold underline">
                 browse current listings
@@ -48,7 +48,7 @@ export default async function ScheduleInspectionPage({ searchParams }: Props) {
               <PropertyCard p={property} />
             </>
           ) : (
-            <div className="rounded-[var(--radius-card)] border border-line bg-white p-6">
+            <div className="rounded-[var(--radius-card)] border border-line bg-surface p-6">
               <h2 className="font-semibold">Where do I find the reference?</h2>
               <p className="mt-2 text-sm leading-relaxed text-slate">
                 Every listing shows a reference such as MNH-S-01001 under the price. You can also press Book inspection on any

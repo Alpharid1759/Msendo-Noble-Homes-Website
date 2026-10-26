@@ -74,7 +74,7 @@ export default async function BlogPostPage({ params }: Props) {
         <Breadcrumbs items={[{ label: "Blog", href: "/blog" }, ...(post.category_slug ? [{ label: post.category_name ?? "", href: `/blog?category=${post.category_slug}` }] : []), { label: post.title }]} />
         <header className="mx-auto mt-8 max-w-3xl">
           {post.category_name && <p className="text-sm font-semibold text-gold-ink">{post.category_name}</p>}
-          <h1 className="display mt-3 text-[2.25rem] leading-tight text-navy-900 md:text-[3rem]">{post.title}</h1>
+          <h1 className="display mt-3 text-[2.25rem] leading-tight text-heading md:text-[3rem]">{post.title}</h1>
           {post.excerpt && <p className="mt-4 text-lg leading-relaxed text-slate">{post.excerpt}</p>}
           <p className="mt-5 text-sm text-slate">
             By <span className="font-semibold text-charcoal">{post.author_name}</span>. Published <time dateTime={post.published_at}>{formatDate(post.published_at)}</time>
@@ -98,7 +98,7 @@ export default async function BlogPostPage({ params }: Props) {
               <ol className="mt-3 space-y-2 border-l border-line text-sm">
                 {headings.map((h) => (
                   <li key={h.id} className={h.level === 3 ? "pl-6" : "pl-3"}>
-                    <a href={`#${h.id}`} className="text-navy-700 hover:underline">
+                    <a href={`#${h.id}`} className="text-accent hover:underline">
                       {h.text}
                     </a>
                   </li>
@@ -112,7 +112,7 @@ export default async function BlogPostPage({ params }: Props) {
               <ul className="mt-10 flex flex-wrap gap-2" aria-label="Tags">
                 {post.tags.map((t) => (
                   <li key={t}>
-                    <Link href={`/blog?tag=${encodeURIComponent(t)}`} className="inline-flex rounded-[3px] bg-sand px-2.5 py-1 text-sm text-navy-800 hover:bg-gold-soft">
+                    <Link href={`/blog?tag=${encodeURIComponent(t)}`} className="inline-flex rounded-[3px] bg-sand px-2.5 py-1 text-sm text-accent hover:bg-gold-soft">
                       {t}
                     </Link>
                   </li>
@@ -139,9 +139,9 @@ export default async function BlogPostPage({ params }: Props) {
       </article>
 
       {related.length > 0 && (
-        <section aria-labelledby="related" className="border-t border-line bg-white py-14">
+        <section aria-labelledby="related" className="border-t border-line bg-surface py-14">
           <div className="container-page">
-            <h2 id="related" className="display text-[2rem] text-navy-900">
+            <h2 id="related" className="display text-[2rem] text-heading">
               Related articles
             </h2>
             <ul className="mt-8 grid gap-8 md:grid-cols-3">

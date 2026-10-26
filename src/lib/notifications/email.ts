@@ -21,14 +21,14 @@ export function renderEmail(opts: { heading: string; intro: string; rows?: Email
     )
     .join("");
   const cta = opts.cta
-    ? `<p style="margin:24px 0 0"><a href="${escape(opts.cta.url)}" style="background:#13233A;color:#ffffff;padding:12px 20px;border-radius:6px;text-decoration:none;font-size:14px;display:inline-block">${escape(opts.cta.label)}</a></p>`
+    ? `<p style="margin:24px 0 0"><a href="${escape(opts.cta.url)}" style="background:#015E36;color:#ffffff;padding:12px 20px;border-radius:6px;text-decoration:none;font-size:14px;display:inline-block">${escape(opts.cta.label)}</a></p>`
     : "";
-  return `<!doctype html><html><body style="margin:0;background:#F7F4EC;font-family:Arial,Helvetica,sans-serif">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F7F4EC;padding:24px 12px"><tr><td align="center">
+  return `<!doctype html><html><body style="margin:0;background:#F8F7F2;font-family:Arial,Helvetica,sans-serif">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F8F7F2;padding:24px 12px"><tr><td align="center">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#ffffff;border:1px solid #E6E0D3;border-radius:8px">
-<tr><td style="background:#13233A;padding:20px 24px;border-radius:8px 8px 0 0"><span style="color:#ffffff;font-size:16px;letter-spacing:2px">MSENDO NOBLE HOMES</span><br><span style="color:#C9AE78;font-size:12px">Property. Opportunity. Confidence.</span></td></tr>
+<tr><td style="padding:20px 24px;border-bottom:3px solid #015E36;border-radius:8px 8px 0 0" align="left"><img src="${publicEnv.siteUrl}/brand/logo-full.png" alt="Msendo Noble Homes" width="120" style="display:block;width:120px;height:auto;border:0"></td></tr>
 <tr><td style="padding:24px">
-<h1 style="margin:0 0 12px;font-size:20px;color:#13233A">${escape(opts.heading)}</h1>
+<h1 style="margin:0 0 12px;font-size:20px;color:#015E36">${escape(opts.heading)}</h1>
 <p style="margin:0 0 16px;font-size:15px;line-height:1.6;color:#1F252D">${escape(opts.intro)}</p>
 ${rows ? `<table role="presentation" cellpadding="0" cellspacing="0">${rows}</table>` : ""}
 ${cta}

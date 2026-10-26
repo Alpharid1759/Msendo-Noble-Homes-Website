@@ -20,7 +20,7 @@ export function PropertySpecs({ p, className }: { p: Pick<PropertyCardData, "bed
     <ul className={clsx("flex flex-wrap gap-x-4 gap-y-1 text-sm text-slate", className)}>
       {items.map(({ icon: Icon, label }) => (
         <li key={label} className="inline-flex items-center gap-1.5">
-          <Icon className="h-4 w-4 text-navy-600" aria-hidden="true" />
+          <Icon className="h-4 w-4 text-gold" aria-hidden="true" />
           {label}
         </li>
       ))}
@@ -45,11 +45,11 @@ export function PropertyCard({
   return (
     <article
       className={clsx(
-        "group relative flex h-full overflow-hidden rounded-[var(--radius-card)] border border-line bg-white transition-shadow hover:shadow-[var(--shadow-lift)]",
+        "gold-frame group relative flex h-full overflow-hidden rounded-[14px] p-2 transition-shadow hover:shadow-[var(--shadow-lift)]",
         layout === "grid" ? "flex-col" : "flex-col sm:flex-row",
       )}
     >
-      <div className={clsx("relative overflow-hidden bg-sand", layout === "grid" ? "aspect-[4/3]" : "aspect-[4/3] sm:aspect-auto sm:w-80 sm:shrink-0")}>
+      <div className={clsx("relative overflow-hidden rounded-[10px] bg-sand", layout === "grid" ? "aspect-[16/10]" : "aspect-[16/10] sm:aspect-auto sm:w-80 sm:shrink-0")}>
         <PropertyImage
           variants={p.cover_variants}
           alt={p.cover_alt || p.title}
@@ -57,24 +57,28 @@ export function PropertyCard({
           priority={priority}
           sizes={layout === "grid" ? undefined : "(min-width: 640px) 320px, 100vw"}
         />
-        <div className="absolute left-3 top-3 flex flex-wrap gap-1.5">
-          <TransactionBadge type={p.transaction_type} />
-          <StatusBadge status={p.status} />
-          {p.is_featured && <FlagBadge>Featured</FlagBadge>}
-          {isNew && !p.is_featured && <FlagBadge tone="light">New</FlagBadge>}
-          {p.is_demo && <FlagBadge tone="demo">Demo listing</FlagBadge>}
+        <div className="absolute inset-x-3 top-3 flex items-start justify-between gap-2">
+          <div className="flex flex-wrap gap-1.5">
+            <TransactionBadge type={p.transaction_type} />
+            <StatusBadge status={p.status} />
+            {p.is_demo && <FlagBadge tone="demo">Demo listing</FlagBadge>}
+          </div>
+          <div className="flex flex-wrap justify-end gap-1.5">
+            {p.is_featured && <FlagBadge>Featured</FlagBadge>}
+            {isNew && !p.is_featured && <FlagBadge tone="light">New</FlagBadge>}
+          </div>
         </div>
         {(p.image_count > 0 || p.video_count > 0) && (
           <div className="absolute bottom-3 right-3 flex gap-1.5">
             {p.image_count > 0 && (
-              <span className="inline-flex items-center gap-1 rounded-[3px] bg-navy-950/75 px-1.5 py-0.5 text-xs font-medium text-white">
+              <span className="inline-flex items-center gap-1 rounded-[4px] bg-black/60 px-1.5 py-0.5 text-xs font-medium text-white backdrop-blur-sm">
                 <Camera className="h-3.5 w-3.5" aria-hidden="true" />
                 {p.image_count}
                 <span className="sr-only">photos</span>
               </span>
             )}
             {p.video_count > 0 && (
-              <span className="inline-flex items-center gap-1 rounded-[3px] bg-navy-950/75 px-1.5 py-0.5 text-xs font-medium text-white">
+              <span className="inline-flex items-center gap-1 rounded-[4px] bg-black/60 px-1.5 py-0.5 text-xs font-medium text-white backdrop-blur-sm">
                 <Video className="h-3.5 w-3.5" aria-hidden="true" />
                 {p.video_count}
                 <span className="sr-only">videos</span>
@@ -84,35 +88,46 @@ export function PropertyCard({
         )}
       </div>
 
-      <div className="flex flex-1 flex-col p-5">
-        <Price price={p.price} price_on_request={p.price_on_request} currency={p.currency} billing_frequency={p.billing_frequency} />
-        <h3 className="mt-1.5 text-[1.0625rem] font-semibold leading-snug text-charcoal">
-          <Link href={href} className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-none group-focus-within:underline">
-            {p.title}
-          </Link>
-        </h3>
+      <div className="@container flex flex-1 flex-col px-3 pb-3 pt-4">
+        <div className="flex flex-col gap-1.5 @sm:flex-row @sm:items-start @sm:justify-between @sm:gap-4">
+          <h3 className="display text-[1.25rem] leading-tight text-heading @sm:text-[1.4rem]">
+            <Link href={href} className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-none group-focus-within:underline">
+              {p.title}
+            </Link>
+          </h3>
+          <Price
+            className="shrink-0 @sm:text-right"
+            size="sm"
+            price={p.price}
+            price_on_request={p.price_on_request}
+            currency={p.currency}
+            billing_frequency={p.billing_frequency}
+          />
+        </div>
         {location && (
           <p className="mt-1.5 inline-flex items-center gap-1.5 text-sm text-slate">
             <MapPin className="h-4 w-4 shrink-0 text-gold-ink" aria-hidden="true" />
             {location}
           </p>
         )}
-        <PropertySpecs p={p} className="mt-3" />
         {layout === "list" && p.description && (
           <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-slate">{p.description}</p>
         )}
         <div className="flex-1" />
-        <p className="mt-4 border-t border-line pt-4 text-xs text-slate">
-          {p.category_name}
-          <span className="mx-2 text-navy-200" aria-hidden="true">
-            /
-          </span>
-          Ref {p.reference}
-        </p>
-        <div className="relative z-10 mt-3 flex gap-2">
+        <div className="mt-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-t border-line pt-3">
+          <p className="text-xs text-slate">
+            {p.category_name}
+            <span className="mx-1.5 text-navy-200" aria-hidden="true">
+              /
+            </span>
+            Ref {p.reference}
+          </p>
+          <PropertySpecs p={p} className="text-xs" />
+        </div>
+        <div className="relative z-10 mt-4 flex flex-wrap gap-2">
           <Link
             href={href}
-            className="inline-flex min-h-10 flex-1 items-center justify-center rounded-[var(--radius-control)] bg-navy-800 px-3 text-sm font-semibold text-white hover:bg-navy-700"
+            className="inline-flex min-h-10 grow basis-[8.5rem] items-center whitespace-nowrap justify-center rounded-[var(--radius-control)] bg-gradient-to-b from-gold-light to-gold px-3 text-sm font-semibold text-navy-950 hover:from-gold hover:to-[#c98c08]"
           >
             View property
           </Link>
@@ -120,7 +135,7 @@ export function PropertyCard({
             href={isRental ? `/schedule-inspection?ref=${p.reference}` : `${href}#enquire`}
             data-track={isRental ? "inspection_cta_click" : "enquiry_cta_click"}
             data-track-ref={p.reference}
-            className="inline-flex min-h-10 flex-1 items-center justify-center rounded-[var(--radius-control)] border border-navy-800 px-3 text-sm font-semibold text-navy-800 hover:bg-navy-100"
+            className="inline-flex min-h-10 grow basis-[8.5rem] items-center whitespace-nowrap justify-center rounded-[var(--radius-control)] border border-accent/60 px-3 text-sm font-semibold text-accent hover:bg-accent/10"
           >
             {isRental ? "Book inspection" : "Enquire now"}
           </Link>

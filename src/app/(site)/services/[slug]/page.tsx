@@ -82,7 +82,7 @@ export default async function ServicePage({ params }: Props) {
           </section>
 
           <section aria-labelledby="benefits">
-            <h2 id="benefits" className="display text-[2rem] text-navy-900">
+            <h2 id="benefits" className="display text-[2rem] text-heading">
               What you get
             </h2>
             <ul className="mt-5 space-y-3">
@@ -96,7 +96,7 @@ export default async function ServicePage({ params }: Props) {
           </section>
 
           <section aria-labelledby="process">
-            <h2 id="process" className="display text-[2rem] text-navy-900">
+            <h2 id="process" className="display text-[2rem] text-heading">
               How it works
             </h2>
             <ol className="mt-6 space-y-5">
@@ -112,7 +112,7 @@ export default async function ServicePage({ params }: Props) {
           </section>
 
           <section aria-labelledby="faqs">
-            <h2 id="faqs" className="display text-[2rem] text-navy-900">
+            <h2 id="faqs" className="display text-[2rem] text-heading">
               Questions
             </h2>
             <div className="mt-5 divide-y divide-line border-y border-line">
@@ -132,7 +132,7 @@ export default async function ServicePage({ params }: Props) {
         </div>
 
         <aside className="space-y-8">
-          <div className="rounded-[var(--radius-card)] border border-line bg-white p-6">
+          <div className="rounded-[var(--radius-card)] border border-line bg-surface p-6">
             <h2 className="text-lg font-semibold">Talk to us about {service.name.toLowerCase()}</h2>
             <div className="mt-5">
               <EnquiryForm defaultCategory={CATEGORY_FOR[service.slug] ?? "general"} showCategory={false} sourcePath={`/services/${service.slug}`} submitLabel="Get Property Assistance" />
@@ -143,7 +143,7 @@ export default async function ServicePage({ params }: Props) {
             <ul className="mt-3 space-y-2">
               {others.map((s) => (
                 <li key={s.slug}>
-                  <Link href={`/services/${s.slug}`} className="font-semibold text-navy-700 hover:underline">
+                  <Link href={`/services/${s.slug}`} className="font-semibold text-accent hover:underline">
                     {s.name}
                   </Link>
                 </li>

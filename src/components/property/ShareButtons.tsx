@@ -33,7 +33,7 @@ export function ShareButtons({ url, title, reference, showPrint = false }: { url
     }
   };
 
-  const btn = "inline-flex min-h-10 items-center gap-2 rounded-[var(--radius-control)] border border-line bg-white px-3 text-sm font-semibold text-navy-800 hover:bg-sand";
+  const btn = "inline-flex min-h-10 items-center gap-2 rounded-[var(--radius-control)] border border-line bg-surface px-3 text-sm font-semibold text-accent hover:bg-sand";
 
   return (
     <div className="flex flex-wrap gap-2 no-print">

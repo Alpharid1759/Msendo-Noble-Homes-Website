@@ -41,7 +41,7 @@ export default async function AdvancedSearchPage() {
     <>
       <PageHeader title="Advanced search" crumbs={[{ label: "Properties", href: "/properties" }, { label: "Advanced search" }]} intro={<p>Combine any of the filters below. Leave a field empty to include everything.</p>} />
       <div className="container-page max-w-4xl py-14">
-        <form action="/properties" method="get" role="search" className="space-y-8 rounded-[var(--radius-card)] border border-line bg-white p-6 md:p-10">
+        <form action="/properties" method="get" role="search" className="space-y-8 rounded-[var(--radius-card)] border border-line bg-surface p-6 md:p-10">
           <fieldset className="grid gap-5 sm:grid-cols-2">
             <legend className="mb-4 text-lg font-semibold">What and where</legend>
             <Select
@@ -112,11 +112,11 @@ export default async function AdvancedSearchPage() {
           <fieldset className="space-y-3">
             <legend className="mb-2 text-lg font-semibold">Other</legend>
             <label className="flex items-center gap-2.5">
-              <input type="checkbox" name="verified" value="1" className="h-4 w-4 accent-navy-800" />
+              <input type="checkbox" name="verified" value="1" className="h-4 w-4 accent-gold" />
               Title documents verified by our team
             </label>
             <label className="flex items-center gap-2.5">
-              <input type="checkbox" name="featured" value="1" className="h-4 w-4 accent-navy-800" />
+              <input type="checkbox" name="featured" value="1" className="h-4 w-4 accent-gold" />
               Featured listings only
             </label>
           </fieldset>
@@ -125,7 +125,7 @@ export default async function AdvancedSearchPage() {
             <button type="submit" data-track="search_submitted" data-track-location="advanced_search" className="inline-flex min-h-12 items-center rounded-[var(--radius-control)] bg-navy-800 px-8 font-semibold text-white hover:bg-navy-700">
               Search properties
             </button>
-            <button type="reset" className="inline-flex min-h-12 items-center rounded-[var(--radius-control)] px-4 font-semibold text-navy-700 hover:bg-sand">
+            <button type="reset" className="inline-flex min-h-12 items-center rounded-[var(--radius-control)] px-4 font-semibold text-accent hover:bg-sand">
               Clear form
             </button>
           </div>

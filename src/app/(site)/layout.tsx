@@ -8,7 +8,7 @@ import { getSettings } from "@/lib/settings";
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {
   const settings = await getSettings();
   return (
-    <>
+    <div className="site-dark min-h-dvh">
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-[60] focus:rounded-sm focus:bg-navy-800 focus:px-4 focus:py-2 focus:text-white"
@@ -26,6 +26,6 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
         requireConsent={settings.analytics.require_consent}
         consentVersion={settings.privacy.consent_version}
       />
-    </>
+    </div>
   );
 }

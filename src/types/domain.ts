@@ -240,7 +240,7 @@ export interface SiteSettings {
     business_hours: string | null;
   };
   social: Record<"facebook" | "instagram" | "x" | "linkedin" | "youtube" | "tiktok", string | null>;
-  brand: { logo_url: string | null; logo_white_url: string | null };
+  brand: { logo_url: string | null; logo_white_url: string | null; hero_image_url: string | null };
   seo: {
     default_title: string;
     default_description: string;
@@ -254,6 +254,9 @@ export interface SiteSettings {
     slot_minutes: number;
     earliest_hour: number;
     latest_hour: number;
+    allow_saturdays: boolean;
+    saturday_earliest_hour: number;
+    saturday_latest_hour: number;
     min_notice_hours: number;
     max_days_ahead: number;
     allow_sundays: boolean;

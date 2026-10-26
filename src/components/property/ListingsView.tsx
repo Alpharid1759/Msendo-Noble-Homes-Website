@@ -40,14 +40,14 @@ export async function ListingsView({ scope, rawParams, basePath }: { scope: List
         <ResultsToolbar total={result.total} sort={sort} view={view} from={from} to={to} />
         <div className="mt-6">
           {result.error ? (
-            <div role="alert" className="rounded-[var(--radius-card)] border border-line bg-white p-8 text-center">
+            <div role="alert" className="rounded-[var(--radius-card)] border border-line bg-surface p-8 text-center">
               <p className="font-semibold text-charcoal">{result.error}</p>
               <p className="mt-2 text-sm text-slate">
                 You can still reach us on {settings.contact.phone_display} or WhatsApp for current availability.
               </p>
             </div>
           ) : result.items.length === 0 ? (
-            <div className="rounded-[var(--radius-card)] border border-dashed border-navy-200 bg-white p-10 text-center">
+            <div className="rounded-[var(--radius-card)] border border-dashed border-navy-200 bg-surface p-10 text-center">
               <SearchX className="mx-auto h-10 w-10 text-navy-200" aria-hidden="true" />
               <h2 className="mt-4 text-lg font-semibold">No properties match your search yet</h2>
               <ul className="mx-auto mt-3 max-w-md space-y-1 text-sm text-slate">
@@ -81,7 +81,7 @@ export async function ListingsView({ scope, rawParams, basePath }: { scope: List
         {result.items.length > 0 && (
           <p className="mt-10 text-center text-sm text-slate">
             Cannot find the right property?{" "}
-            <Link href="/contact?category=buying" className="font-semibold text-navy-700 underline underline-offset-2">
+            <Link href="/contact?category=buying" className="font-semibold text-accent underline underline-offset-2">
               Tell us what you are looking for
             </Link>
             .

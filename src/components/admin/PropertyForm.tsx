@@ -171,7 +171,7 @@ export function PropertyForm({
       <input type="hidden" name="charges_json" value={JSON.stringify(charges)} />
 
       {state.status !== "idle" && state.message && (
-        <p role={state.status === "error" ? "alert" : "status"} className={clsx("rounded-[var(--radius-control)] px-4 py-3 text-sm", state.status === "error" ? "bg-[#fbeeed] text-danger" : "bg-[#e9f4ee] text-success")}>
+        <p role={state.status === "error" ? "alert" : "status"} className={clsx("rounded-[var(--radius-control)] px-4 py-3 text-sm", state.status === "error" ? "bg-danger/10 text-danger" : "bg-success/10 text-success")}>
           {state.message}
           {state.status === "error" && Object.keys(e).length > 0 && ` (${Object.keys(e).length} field${Object.keys(e).length === 1 ? "" : "s"})`}
         </p>

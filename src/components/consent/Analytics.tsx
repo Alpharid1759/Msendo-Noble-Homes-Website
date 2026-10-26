@@ -86,12 +86,12 @@ export function Analytics({
         <div
           role="region"
           aria-label="Cookie preferences"
-          className="fixed inset-x-3 bottom-3 z-50 mx-auto max-w-2xl rounded-[var(--radius-card)] border border-line bg-white p-5 shadow-[var(--shadow-lift)] no-print sm:inset-x-6"
+          className="fixed inset-x-3 bottom-3 z-50 mx-auto max-w-2xl rounded-[var(--radius-card)] border border-line bg-surface p-5 shadow-[var(--shadow-lift)] no-print sm:inset-x-6"
         >
           <p className="text-sm leading-relaxed text-charcoal">
             We use essential cookies to run this site. With your permission we also use analytics cookies to understand which
             pages and listings are useful. We never send your contact details to analytics providers.{" "}
-            <Link href="/legal/cookies" className="font-semibold text-navy-700 underline underline-offset-2">
+            <Link href="/legal/cookies" className="font-semibold text-accent underline underline-offset-2">
               Cookie policy
             </Link>
           </p>
@@ -106,7 +106,7 @@ export function Analytics({
             <button
               type="button"
               onClick={() => decide(false)}
-              className="min-h-11 rounded-[var(--radius-control)] border border-navy-800 px-5 text-sm font-semibold text-navy-800 hover:bg-navy-100"
+              className="min-h-11 rounded-[var(--radius-control)] border border-accent px-5 text-sm font-semibold text-accent hover:bg-sand"
             >
               Essential only
             </button>
@@ -121,7 +121,7 @@ export function CookieSettingsButton() {
   return (
     <button
       type="button"
-      className="font-semibold text-navy-700 underline underline-offset-2"
+      className="font-semibold text-accent underline underline-offset-2"
       onClick={() => {
         try {
           window.localStorage.removeItem("mnh-consent");

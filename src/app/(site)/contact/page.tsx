@@ -58,7 +58,7 @@ export default async function ContactPage({ searchParams }: Props) {
                     href={href}
                     data-track={track}
                     {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                    className="break-words font-semibold text-navy-900 hover:underline"
+                    className="break-words font-semibold text-heading hover:underline"
                   >
                     {value}
                   </a>
@@ -71,7 +71,7 @@ export default async function ContactPage({ searchParams }: Props) {
               </span>
               <div>
                 <p className="text-sm text-slate">Business hours</p>
-                <p className="font-semibold text-navy-900">{contact.business_hours ?? "Call ahead to arrange a visit"}</p>
+                <p className="font-semibold text-heading">{contact.business_hours ?? "Call ahead to arrange a visit"}</p>
               </div>
             </li>
           </ul>
@@ -87,8 +87,8 @@ export default async function ContactPage({ searchParams }: Props) {
           </div>
         </aside>
 
-        <section aria-labelledby="form-heading" className="rounded-[var(--radius-card)] border border-line bg-white p-6 md:p-10">
-          <h2 id="form-heading" className="display text-[2rem] text-navy-900">
+        <section aria-labelledby="form-heading" className="rounded-[var(--radius-card)] border border-line bg-surface p-6 md:p-10">
+          <h2 id="form-heading" className="display text-[2rem] text-heading">
             Send us a message
           </h2>
           <p className="mt-2 text-slate">Fields marked * are required. Give us a phone number or email so we can reply.</p>

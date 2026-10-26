@@ -1,11 +1,10 @@
 // src/app/(site)/page.tsx
-import { CalendarCheck, FileSearch, Handshake, MessagesSquare, Search, Video } from "lucide-react";
+import { BadgeCheck, Building2, CalendarCheck, FileSearch, Handshake, MessagesSquare, ReceiptText, Search, Video } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { NewsletterForm } from "@/components/forms/NewsletterForm";
 import { HeroSearch } from "@/components/property/HeroSearch";
 import { Price } from "@/components/property/Price";
-import { PropertyGrid } from "@/components/property/PropertyCard";
+import { PropertyCard } from "@/components/property/PropertyCard";
 import { PropertyImage } from "@/components/property/PropertyImage";
 import { VideoPlayer } from "@/components/property/VideoPlayer";
 import { HeroIllustration } from "@/components/site/HeroIllustration";
@@ -16,6 +15,7 @@ import { SERVICES } from "@/content/services";
 import { getBlogPosts } from "@/lib/blog";
 import { publicEnv } from "@/lib/env";
 import { formatDate, formatLocation } from "@/lib/format";
+import { describeHours } from "@/lib/inspection-rules";
 import {
   getCategories,
   getFeaturedListings,
@@ -41,18 +41,22 @@ const STEPS = [
 
 const COMMITMENTS = [
   {
+    icon: ReceiptText,
     title: "Charges shown separately",
     text: "Rent, caution deposits, agency, legal and service charges each have their own line. We never fold them into one headline figure.",
   },
   {
+    icon: BadgeCheck,
     title: "Honest document status",
     text: "A title is marked verified only after our team has reviewed it. Everything else is labelled as the owner's stated documents.",
   },
   {
+    icon: CalendarCheck,
     title: "Inspections confirmed by a person",
     text: "Booking online sends a request. A member of our team calls to confirm the time, so no one makes a wasted trip.",
   },
   {
+    icon: Building2,
     title: "An office you can visit",
     text: "Meet us at Plot 833 Emmanuel Aguna, Jabi District, Abuja, before you commit to anything.",
   },
@@ -77,6 +81,7 @@ export default async function HomePage() {
   const featuredDistricts = locations.filter((l) => l.type === "district" && l.is_featured).slice(0, 8);
   const testimonials = settings.testimonials.items.filter((t) => t.permission_confirmed);
   const { contact } = settings;
+  const heroImage = settings.brand.hero_image_url;
 
   return (
     <>
@@ -98,23 +103,52 @@ export default async function HomePage() {
             addressCountry: "NG",
           },
           areaServed: { "@type": "City", name: "Abuja" },
+          openingHoursSpecification: [
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+              opens: `${String(settings.inspections.earliest_hour).padStart(2, "0")}:00`,
+              closes: `${String(settings.inspections.latest_hour).padStart(2, "0")}:00`,
+            },
+            ...(settings.inspections.allow_saturdays
+              ? [
+                  {
+                    "@type": "OpeningHoursSpecification",
+                    dayOfWeek: ["Saturday"],
+                    opens: `${String(settings.inspections.saturday_earliest_hour).padStart(2, "0")}:00`,
+                    closes: `${String(settings.inspections.saturday_latest_hour).padStart(2, "0")}:00`,
+                  },
+                ]
+              : []),
+          ],
           sameAs: Object.values(settings.social).filter(Boolean),
         }}
       />
 
-      <section className="on-dark relative overflow-hidden bg-navy-900 text-white">
-        <HeroIllustration className="pointer-events-none absolute bottom-0 right-[-8rem] h-[85%] w-auto opacity-70 md:right-[-4rem] lg:right-0 lg:opacity-100" />
-        <div className="absolute inset-0 bg-gradient-to-r from-navy-900 via-navy-900/90 to-navy-900/20" aria-hidden="true" />
-        <div className="container-page relative pb-28 pt-16 md:pb-36 md:pt-24">
-          <p className="text-sm font-semibold text-gold">{settings.company.tagline}</p>
-          <h1 className="display mt-5 max-w-3xl text-[2.75rem] sm:text-[3.5rem] lg:text-[4.5rem]">
+      <section className="on-dark relative -mt-[5.25rem] overflow-hidden bg-navy-950 text-white">
+        {heroImage ? (
+          <img src={heroImage} alt="" fetchPriority="high" className="absolute inset-0 h-full w-full object-cover" />
+        ) : (
+          <>
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_20%,#1d3a2b_0%,#0a0d0b_60%)]" aria-hidden="true" />
+            <HeroIllustration className="pointer-events-none absolute bottom-0 right-[-10rem] h-[78%] w-auto opacity-60 md:right-[-4rem] lg:right-0 lg:opacity-90" />
+          </>
+        )}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#050706]/90 via-[#050706]/55 to-transparent" aria-hidden="true" />
+        <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#0e1210] to-transparent" aria-hidden="true" />
+        <div className="container-page relative pb-56 pt-40 md:pb-64 md:pt-48 lg:pt-52">
+          <p className="flex items-center gap-3 text-sm font-semibold tracking-[0.18em] text-gold-light">
+            <span className="h-px w-10 bg-gold" aria-hidden="true" />
+            {settings.company.tagline.toUpperCase()}
+          </p>
+          <h1 className="display mt-6 max-w-4xl text-[2.6rem] uppercase leading-[1.02] tracking-[0.01em] text-[#f6f1e6] sm:text-[3.6rem] lg:text-[4.75rem]">
             Find a property that fits your ambition.
           </h1>
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-navy-100">
+          <p className="mt-6 max-w-xl text-lg leading-relaxed text-[#e4dfd3]">
             Homes, land, offices and investment property across Abuja, presented with clear prices, real photographs and an
             honest account of the documents behind each one.
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-9 flex flex-wrap gap-3">
             <ButtonLink href="/properties" variant="gold" size="lg">
               Explore Properties
             </ButtonLink>
@@ -125,53 +159,61 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <div className="container-page relative z-10 -mt-20 md:-mt-24">
-        <HeroSearch categories={categories} locations={locations} />
-        <p className="mt-3 text-right text-sm">
-          <Link href="/search" className="font-semibold text-navy-700 underline underline-offset-2">
-            Advanced search
-          </Link>
-        </p>
+      <div className="container-page relative z-10 -mt-40 md:-mt-44">
+        <div className="mx-auto max-w-5xl">
+          <HeroSearch categories={categories} locations={locations} />
+          <p className="mt-3 text-right text-sm">
+            <Link href="/search" className="font-semibold text-accent underline underline-offset-2">
+              Advanced search
+            </Link>
+          </p>
+        </div>
       </div>
 
-      <section aria-labelledby="featured-heading" className="container-page py-16 md:py-20">
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <h2 id="featured-heading" className="display text-[2.25rem] text-navy-900 md:text-[2.75rem]">
-              Featured properties
-            </h2>
-            <p className="mt-2 max-w-xl text-slate">Selected listings across Abuja, updated as properties come to market.</p>
-          </div>
-          <div className="flex gap-2">
-            <ButtonLink href="/properties/for-sale" variant="secondary" size="sm">
-              Browse Properties for Sale
-            </ButtonLink>
-            <ButtonLink href="/properties/for-rent" variant="secondary" size="sm">
-              Browse Properties for Rent
-            </ButtonLink>
-          </div>
+      <section aria-labelledby="featured-heading" className="container-page py-16 md:py-24">
+        <div className="text-center">
+          <h2 id="featured-heading" className="display text-[2.5rem] text-heading md:text-[3.25rem]">
+            Featured Properties
+          </h2>
+          <p className="mx-auto mt-3 max-w-xl text-slate">Selected listings across Abuja, updated as properties come to market.</p>
         </div>
-        <div className="mt-8">
+        <div className="mx-auto mt-10 max-w-6xl">
           {featured.length > 0 ? (
-            <PropertyGrid items={featured} />
+            <ul className="grid gap-6 md:grid-cols-2">
+              {featured.slice(0, 4).map((p, i) => (
+                <li key={p.id}>
+                  <PropertyCard p={p} priority={i < 2} />
+                </li>
+              ))}
+            </ul>
           ) : (
-            <div className="rounded-[var(--radius-card)] border border-dashed border-navy-200 bg-white p-10 text-center">
-              <h3 className="text-lg font-semibold">New listings are being prepared</h3>
+            <div className="gold-frame rounded-[14px] p-10 text-center">
+              <h3 className="display text-[1.6rem] text-heading">New listings are being prepared</h3>
               <p className="mx-auto mt-2 max-w-md text-slate">
                 Tell us what you are looking for and we will contact you as soon as a matching property is available.
               </p>
               <div className="mt-6">
-                <ButtonLink href="/contact?category=buying">Get Property Assistance</ButtonLink>
+                <ButtonLink href="/contact?category=buying" variant="gold">
+                  Get Property Assistance
+                </ButtonLink>
               </div>
             </div>
           )}
         </div>
+        <div className="mt-10 flex flex-wrap justify-center gap-3">
+          <ButtonLink href="/properties/for-sale" variant="secondary">
+            Browse Properties for Sale
+          </ButtonLink>
+          <ButtonLink href="/properties/for-rent" variant="secondary">
+            Browse Properties for Rent
+          </ButtonLink>
+        </div>
       </section>
 
-      <section aria-labelledby="categories-heading" className="border-y border-line bg-white py-16 md:py-20">
+      <section aria-labelledby="categories-heading" className="border-y border-line bg-surface py-16 md:py-20">
         <div className="container-page grid gap-10 lg:grid-cols-[1fr_2fr]">
           <div>
-            <h2 id="categories-heading" className="display text-[2.25rem] text-navy-900">
+            <h2 id="categories-heading" className="display text-[2.25rem] text-heading">
               Browse by property type
             </h2>
             <p className="mt-3 text-slate">From a first apartment to a warehouse in Idu, start with the kind of property you need.</p>
@@ -182,11 +224,11 @@ export default async function HomePage() {
               return (
                 <li key={c.id}>
                   <Link href={`/properties?category=${c.slug}`} className="group flex items-center gap-4 border-b border-line py-4">
-                    <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-[var(--radius-control)] bg-ivory text-navy-700 transition-colors group-hover:bg-navy-800 group-hover:text-gold">
+                    <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-[var(--radius-control)] bg-ivory text-accent transition-colors group-hover:bg-navy-800 group-hover:text-gold">
                       <CategoryIcon name={c.icon} className="h-5 w-5" />
                     </span>
                     <span className="flex-1">
-                      <span className="block font-semibold text-charcoal group-hover:text-navy-700">{c.name}</span>
+                      <span className="block font-semibold text-charcoal group-hover:text-accent">{c.name}</span>
                       <span className="block text-sm text-slate">
                         {count > 0 ? `${count} listing${count === 1 ? "" : "s"}` : "Ask about availability"}
                       </span>
@@ -201,7 +243,7 @@ export default async function HomePage() {
 
       {featuredDistricts.length > 0 && (
         <section aria-labelledby="locations-heading" className="container-page py-16 md:py-20">
-          <h2 id="locations-heading" className="display text-[2.25rem] text-navy-900">
+          <h2 id="locations-heading" className="display text-[2.25rem] text-heading">
             Explore Abuja by district
           </h2>
           <p className="mt-2 max-w-xl text-slate">Our listings start in the Federal Capital Territory, with more Nigerian cities to follow.</p>
@@ -212,9 +254,9 @@ export default async function HomePage() {
                 <li key={d.id}>
                   <Link
                     href={`/locations/${d.slug}`}
-                    className="flex h-full flex-col justify-between rounded-[var(--radius-card)] border border-line bg-white p-5 transition-colors hover:border-navy-700"
+                    className="flex h-full flex-col justify-between rounded-[var(--radius-card)] border border-line bg-surface p-5 transition-colors hover:border-accent"
                   >
-                    <span className="display text-[1.5rem] text-navy-900">{d.name}</span>
+                    <span className="display text-[1.5rem] text-heading">{d.name}</span>
                     <span className="mt-6 text-sm text-slate">{count > 0 ? `${count} available` : "View area guide"}</span>
                   </Link>
                 </li>
@@ -261,7 +303,7 @@ export default async function HomePage() {
         <section aria-labelledby="videos-heading" className="container-page py-16 md:py-20">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
-              <h2 id="videos-heading" className="display text-[2.25rem] text-navy-900">
+              <h2 id="videos-heading" className="display text-[2.25rem] text-heading">
                 Watch before you visit
               </h2>
               <p className="mt-2 text-slate">Video tours load only when you press play.</p>
@@ -294,11 +336,11 @@ export default async function HomePage() {
         </section>
       )}
 
-      <section aria-labelledby="services-heading" className="border-y border-line bg-white py-16 md:py-20">
+      <section aria-labelledby="services-heading" className="border-y border-line bg-surface py-16 md:py-20">
         <div className="container-page">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
-              <h2 id="services-heading" className="display text-[2.25rem] text-navy-900">
+              <h2 id="services-heading" className="display text-[2.25rem] text-heading">
                 What we do
               </h2>
               <p className="mt-2 max-w-xl text-slate">Sales, rentals, management and advisory under one roof in Jabi.</p>
@@ -325,52 +367,50 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section aria-labelledby="why-heading" className="container-page grid gap-12 py-16 md:py-20 lg:grid-cols-2">
-        <div>
-          <h2 id="why-heading" className="display text-[2.25rem] text-navy-900">
-            Why work with Msendo Noble Homes
+      <section aria-labelledby="why-heading" className="container-page py-16 md:py-24">
+        <h2 id="why-heading" className="display text-center text-[2.5rem] text-heading md:text-[3.25rem]">
+          Why Choose Us
+        </h2>
+        <p className="mx-auto mt-3 max-w-xl text-center text-slate">
+          Property decisions are large and hard to undo. These are the standards we hold every listing and every conversation to.
+        </p>
+        <ul className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+          {COMMITMENTS.map((c) => (
+            <li key={c.title} className="text-center">
+              <c.icon className="mx-auto h-10 w-10 text-gold" strokeWidth={1.25} aria-hidden="true" />
+              <h3 className="display mt-4 text-[1.4rem] text-heading">{c.title}</h3>
+              <p className="mx-auto mt-2 max-w-xs text-[0.9375rem] leading-relaxed text-slate">{c.text}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section aria-labelledby="how-heading" className="border-y border-line bg-navy-900 py-16 md:py-20">
+        <div className="container-page">
+          <h2 id="how-heading" className="display text-center text-[2.25rem] text-heading md:text-[2.75rem]">
+            How it works
           </h2>
-          <p className="mt-3 max-w-md text-slate">
-            Property decisions are large and hard to undo. These are the standards we hold every listing and every
-            conversation to.
-          </p>
-          <dl className="mt-8 space-y-6">
-            {COMMITMENTS.map((c) => (
-              <div key={c.title} className="border-l-2 border-gold pl-5">
-                <dt className="font-semibold text-charcoal">{c.title}</dt>
-                <dd className="mt-1 text-[0.9375rem] leading-relaxed text-slate">{c.text}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-        <div className="rounded-[var(--radius-card)] bg-navy-900 p-8 text-white on-dark md:p-10">
-          <h2 className="display text-[2rem]">How it works</h2>
-          <ol className="mt-8 space-y-6">
+          <ol className="mt-12 grid gap-8 md:grid-cols-5">
             {STEPS.map((s, i) => (
-              <li key={s.title} className="flex gap-4">
-                <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-gold/60 text-sm font-semibold text-gold">
-                  {i + 1}
+              <li key={s.title} className="relative text-center">
+                {i < STEPS.length - 1 && <span className="absolute left-[calc(50%+2rem)] top-6 hidden h-px w-[calc(100%-4rem)] bg-gold/30 md:block" aria-hidden="true" />}
+                <span className="mx-auto inline-flex h-12 w-12 items-center justify-center rounded-full border border-gold/60 text-gold">
+                  <s.icon className="h-5 w-5" aria-hidden="true" />
                 </span>
-                <div>
-                  <h3 className="font-semibold">{s.title}</h3>
-                  <p className="mt-1 text-sm leading-relaxed text-navy-200">{s.text}</p>
-                </div>
+                <p className="mt-3 text-xs font-semibold tracking-[0.2em] text-gold-light">STEP {i + 1}</p>
+                <h3 className="mt-1 font-semibold text-heading">{s.title}</h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-slate">{s.text}</p>
               </li>
             ))}
           </ol>
-          <div className="mt-8">
-            <ButtonLink href="/schedule-inspection" variant="gold">
-              Book an Inspection
-            </ButtonLink>
-          </div>
         </div>
       </section>
 
       {posts.items.length > 0 && (
-        <section aria-labelledby="blog-heading" className="border-t border-line bg-white py-16 md:py-20">
+        <section aria-labelledby="blog-heading" className="border-t border-line bg-surface py-16 md:py-20">
           <div className="container-page">
             <div className="flex flex-wrap items-end justify-between gap-4">
-              <h2 id="blog-heading" className="display text-[2.25rem] text-navy-900">
+              <h2 id="blog-heading" className="display text-[2.25rem] text-heading">
                 Insights and guides
               </h2>
               <ButtonLink href="/blog" variant="secondary" size="sm">
@@ -403,14 +443,14 @@ export default async function HomePage() {
 
       {testimonials.length > 0 && (
         <section aria-labelledby="testimonials-heading" className="container-page py-16 md:py-20">
-          <h2 id="testimonials-heading" className="display text-[2.25rem] text-navy-900">
+          <h2 id="testimonials-heading" className="display text-[2.25rem] text-heading">
             What clients say
           </h2>
           <ul className="mt-8 grid gap-6 md:grid-cols-3">
             {testimonials.slice(0, 3).map((t) => (
               <li key={`${t.name}-${t.quote.slice(0, 20)}`}>
-                <figure className="h-full rounded-[var(--radius-card)] border border-line bg-white p-6">
-                  <blockquote className="display text-[1.25rem] leading-snug text-navy-900">{t.quote}</blockquote>
+                <figure className="h-full rounded-[var(--radius-card)] border border-line bg-surface p-6">
+                  <blockquote className="display text-[1.25rem] leading-snug text-heading">{t.quote}</blockquote>
                   <figcaption className="mt-4 text-sm">
                     <span className="font-semibold">{t.name}</span>
                     {t.context && <span className="block text-slate">{t.context}</span>}
@@ -422,31 +462,32 @@ export default async function HomePage() {
         </section>
       )}
 
-      <section aria-labelledby="cta-heading" className="container-page pb-16 md:pb-20">
-        <div className="grid gap-8 overflow-hidden rounded-[var(--radius-card)] border border-line bg-white md:grid-cols-2">
-          <div className="p-8 md:p-12">
-            <h2 id="cta-heading" className="display text-[2rem] text-navy-900 md:text-[2.5rem]">
-              Tell us what you are looking for
+      <section aria-labelledby="cta-heading" className="container-page pb-16 md:pb-24">
+        <div className="relative overflow-hidden rounded-[16px] border border-gold/25 bg-navy-950 px-6 py-14 text-center md:px-12">
+          {heroImage && <img src={heroImage} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover opacity-25 blur-[2px]" />}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgb(230_162_12/0.14)_0%,transparent_70%)]" aria-hidden="true" />
+          <div className="relative">
+            <h2 id="cta-heading" className="display text-[2rem] text-[#f6f1e6] md:text-[2.75rem]">
+              Private viewings available on request
             </h2>
-            <p className="mt-3 text-slate">
-              Buying, renting, investing or selling, a short conversation saves days of searching. Call, WhatsApp or send
-              your brief.
+            <p className="mx-auto mt-3 max-w-2xl text-[#d9d4c8]">
+              Buying, renting, investing or selling, a short conversation saves days of searching. Our office in Jabi is open{" "}
+              {describeHours(settings.inspections).replace(/; /g, " and ")}.
             </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <ButtonLink href="/contact">Speak to Our Team</ButtonLink>
-              <ButtonLink href="/list-your-property" variant="secondary">
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <ButtonLink href="/schedule-inspection" variant="gold" size="lg">
+                Book an Inspection
+              </ButtonLink>
+              <ButtonLink href="/contact" variant="outline-light" size="lg">
+                Speak to Our Team
+              </ButtonLink>
+              <ButtonLink href="/list-your-property" variant="outline-light" size="lg">
                 List Your Property
               </ButtonLink>
             </div>
           </div>
-          <div className="flex flex-col justify-center border-t border-line bg-ivory p-8 md:border-l md:border-t-0 md:p-12">
-            <h2 className="text-lg font-semibold">Property insights by email</h2>
-            <p className="mt-2 text-sm text-slate">New listings and practical guides. No more than twice a month.</p>
-            <div className="mt-4">
-              <NewsletterForm tone="light" />
-            </div>
-          </div>
         </div>
+
       </section>
     </>
   );

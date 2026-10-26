@@ -25,7 +25,7 @@ export default function FaqPage() {
       <div className="container-page max-w-4xl py-14">
         {FAQ_GROUPS.map((g) => (
           <section key={g.title} aria-labelledby={`faq-${g.title}`} className="mb-12">
-            <h2 id={`faq-${g.title}`} className="display text-[2rem] text-navy-900">
+            <h2 id={`faq-${g.title}`} className="display text-[2rem] text-heading">
               {g.title}
             </h2>
             <div className="mt-4 divide-y divide-line border-y border-line">
@@ -43,7 +43,7 @@ export default function FaqPage() {
             </div>
           </section>
         ))}
-        <div className="rounded-[var(--radius-card)] border border-line bg-white p-8 text-center">
+        <div className="rounded-[var(--radius-card)] border border-line bg-surface p-8 text-center">
           <h2 className="text-lg font-semibold">Still have a question?</h2>
           <div className="mt-4">
             <ButtonLink href="/contact">Speak to Our Team</ButtonLink>

@@ -65,11 +65,11 @@ export async function GalleryPage({ kind, tx, rawParams }: { kind: "photos" | "v
 
         <div className="mt-8">
           {result.error ? (
-            <p role="alert" className="rounded-[var(--radius-card)] border border-line bg-white p-8 text-center font-semibold">
+            <p role="alert" className="rounded-[var(--radius-card)] border border-line bg-surface p-8 text-center font-semibold">
               {result.error}
             </p>
           ) : result.items.length === 0 ? (
-            <div className="rounded-[var(--radius-card)] border border-dashed border-navy-200 bg-white p-10 text-center">
+            <div className="rounded-[var(--radius-card)] border border-dashed border-navy-200 bg-surface p-10 text-center">
               {kind === "photos" ? <ImageOff className="mx-auto h-10 w-10 text-navy-200" aria-hidden="true" /> : <Clapperboard className="mx-auto h-10 w-10 text-navy-200" aria-hidden="true" />}
               <h2 className="mt-4 text-lg font-semibold">No {kind === "photos" ? "photo galleries" : "video tours"} match yet</h2>
               <p className="mx-auto mt-2 max-w-md text-sm text-slate">Clear the filters, browse every listing {label}, or ask us for a live video call of a property.</p>
@@ -102,7 +102,7 @@ export async function GalleryPage({ kind, tx, rawParams }: { kind: "photos" | "v
                   .slice(0, 2)
                   .map((v) => (
                     <li key={v.id}>
-                      <article className="flex h-full flex-col overflow-hidden rounded-[var(--radius-card)] border border-line bg-white">
+                      <article className="flex h-full flex-col overflow-hidden rounded-[var(--radius-card)] border border-line bg-surface">
                         <VideoPlayer
                           src={v.storage_path}
                           poster={v.poster_path}

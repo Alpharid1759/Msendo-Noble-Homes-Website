@@ -21,13 +21,15 @@ Also generate `IP_HASH_SALT` (any long random string).
 - WhatsApp: https://wa.link/4w83p2, and `2349028748800` for messages that include a property reference
 - Email: MsendoIntegratedltd@gmail.com
 - Office: Plot 833 Emmanuel Aguna, Jabi District, Abuja
+- Business hours: Monday to Friday 7:00am to 5:00pm, Saturday 10:00am to 4:00pm, closed Sunday
+- Logo (PNG), used for the header, favicon, social image and emails
 
 ## Still needed from Msendo
 
 - Confirmation that the WhatsApp Business number is the same as the phone number above (prefilled property messages use it)
-- Official logo files (full colour, white, square icon), ideally SVG and PNG
+- Logo as SVG (sharper at every size than the PNG received) and a white version for dark backgrounds, if available
+- A wide, high-resolution photograph for the home page hero (no text on it); upload in Site settings > Logo and hero image
 - CAC RC number, if it should appear in the footer
-- Business hours
 - Social media profile links
 - Mission, vision and values wording approval (drafts are on the About page, marked as awaiting approval)
 - Leadership profiles and verified milestones, if wanted

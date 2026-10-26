@@ -4,7 +4,7 @@
 import { useActionState, useMemo, useState } from "react";
 import { requestInspection } from "@/app/actions/public";
 import { initialFormState } from "@/lib/form-state";
-import { lagosParts, timeOptions } from "@/lib/inspection-rules";
+import { describeHours, lagosParts, timeOptions } from "@/lib/inspection-rules";
 import type { SiteSettings } from "@/types/domain";
 import { ConsentCheckbox, Field, FormMessage, inputProps, SpamGuard, SubmitButton } from "./FormBits";
 
@@ -18,7 +18,11 @@ export function InspectionForm({
   allowReferenceEdit?: boolean;
 }) {
   const [state, action] = useActionState(requestInspection, initialFormState);
-  const times = useMemo(() => timeOptions(rules), [rules]);
+  const v0 = state.values ?? {};
+  const [date, setDate] = useState(v0.preferred_date ?? "");
+  const [altDate, setAltDate] = useState(v0.alternative_date ?? "");
+  const times = useMemo(() => timeOptions(rules, date || undefined), [rules, date]);
+  const altTimes = useMemo(() => timeOptions(rules, altDate || undefined), [rules, altDate]);
   const [now] = useState(() => Date.now());
   const minDate = lagosParts(new Date(now + rules.min_notice_hours * 3_600_000)).date;
   const maxDate = lagosParts(new Date(now + rules.max_days_ahead * 86_400_000)).date;
@@ -59,12 +63,12 @@ export function InspectionForm({
 
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label="Preferred date" name="preferred_date" error={state.fieldErrors?.preferred_date} required>
-          <input {...inputProps("preferred_date", state)} type="date" min={minDate} max={maxDate} className="field-input" required />
+          <input {...inputProps("preferred_date", state)} type="date" min={minDate} max={maxDate} className="field-input" required onChange={(e) => setDate(e.target.value)} />
         </Field>
         <Field label="Preferred time" name="preferred_time" error={state.fieldErrors?.preferred_time} required>
           <select {...inputProps("preferred_time", state)} defaultValue={v.preferred_time ?? ""} className="field-input" required>
             <option value="" disabled>
-              Choose a time
+              {date && times.length === 0 ? "Closed on this day" : "Choose a time"}
             </option>
             {times.map((t) => (
               <option key={t.value} value={t.value}>
@@ -77,12 +81,12 @@ export function InspectionForm({
 
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label="Alternative date" name="alternative_date" error={state.fieldErrors?.alternative_date}>
-          <input {...inputProps("alternative_date", state)} type="date" min={minDate} max={maxDate} className="field-input" />
+          <input {...inputProps("alternative_date", state)} type="date" min={minDate} max={maxDate} className="field-input" onChange={(e) => setAltDate(e.target.value)} />
         </Field>
         <Field label="Alternative time" name="alternative_time" error={state.fieldErrors?.alternative_time}>
           <select {...inputProps("alternative_time", state)} defaultValue={v.alternative_time ?? ""} className="field-input">
             <option value="">No preference</option>
-            {times.map((t) => (
+            {altTimes.map((t) => (
               <option key={t.value} value={t.value}>
                 {t.label}
               </option>
@@ -100,8 +104,7 @@ export function InspectionForm({
       </Field>
 
       <p className="text-sm leading-relaxed text-slate">
-        Inspections run {times[0]?.label} to {times[times.length - 1]?.label} Abuja time
-        {rules.allow_sundays ? "" : ", Monday to Saturday"}. This is a request: we will call to confirm before you travel.
+        Inspection hours (Abuja time): {describeHours(rules)}. This is a request: we will call to confirm before you travel.
       </p>
 
       <ConsentCheckbox state={state} purpose="arrange this inspection" />

@@ -94,7 +94,8 @@ Online bookings arrive as **requests**. They are not confirmed until you confirm
 - **Company, Contact, Social media, Logo**: changes appear across the site and in emails within seconds.
 - **Search engines**: default title and description, sharing image, Google verification code.
 - **Analytics**: paste your Google Analytics ID. Visitors are asked for consent first.
-- **Inspection booking rules**: opening hours, notice period, Sunday bookings.
+- **Logo and hero image**: paste the URL of a wide photograph (at least 2400px across, no text on it) to replace the home page hero background.
+- **Opening and inspection hours**: weekday hours, Saturday hours (on or off), notice period, Sunday bookings. The hours text in the footer, contact page and inspection form follows these.
 - **Notifications**: who receives new enquiry alerts.
 - **Testimonials**: add only real quotes from clients who have given written permission, and tick the permission box.
 

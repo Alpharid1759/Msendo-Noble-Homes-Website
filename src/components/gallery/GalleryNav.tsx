@@ -22,7 +22,7 @@ export function GalleryNav({ kind, tx }: { kind: "photos" | "videos"; tx: "for-s
                 aria-current={active ? "page" : undefined}
                 className={clsx(
                   "inline-flex min-h-10 items-center rounded-[var(--radius-control)] px-4 text-sm font-semibold",
-                  active ? "bg-gold text-navy-900" : "border border-white/25 text-white hover:bg-white/10",
+                  active ? "bg-gold text-navy-950" : "border border-white/25 text-white hover:bg-white/10",
                 )}
               >
                 {t.label}

@@ -4,7 +4,7 @@ import { PRICE_OPTIONS } from "@/components/property/filter-options";
 import type { ListingFilters } from "@/lib/search-params";
 import type { Category, LocationRow } from "@/types/domain";
 
-const ctl = "h-11 w-full rounded-[var(--radius-control)] border border-line bg-white px-3 text-[0.9375rem]";
+const ctl = "h-11 w-full rounded-[var(--radius-control)] border border-line bg-surface px-3 text-[0.9375rem]";
 
 export function GalleryFilters({
   basePath,
@@ -20,7 +20,7 @@ export function GalleryFilters({
   const districts = locations.filter((l) => l.type === "district");
   const hasFilters = Boolean(filters.location || filters.category || filters.minPrice || filters.maxPrice);
   return (
-    <form action={basePath} method="get" className="grid gap-3 rounded-[var(--radius-card)] border border-line bg-white p-4 sm:grid-cols-2 lg:grid-cols-[1fr_1fr_0.7fr_0.7fr_auto]">
+    <form action={basePath} method="get" className="grid gap-3 rounded-[var(--radius-card)] border border-line bg-surface p-4 sm:grid-cols-2 lg:grid-cols-[1fr_1fr_0.7fr_0.7fr_auto]">
       <div>
         <label htmlFor="g-location" className="mb-1 block text-xs font-semibold text-slate">
           Location
@@ -78,7 +78,7 @@ export function GalleryFilters({
           Filter
         </button>
         {hasFilters && (
-          <Link href={basePath} className="inline-flex h-11 items-center px-2 text-sm font-semibold text-navy-700 underline underline-offset-2">
+          <Link href={basePath} className="inline-flex h-11 items-center px-2 text-sm font-semibold text-accent underline underline-offset-2">
             Reset
           </Link>
         )}

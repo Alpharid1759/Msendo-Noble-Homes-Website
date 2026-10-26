@@ -31,12 +31,12 @@ export function DesktopNav() {
                 href={item.href}
                 aria-current={active ? "page" : undefined}
                 className={clsx(
-                  "relative block rounded-sm px-2.5 py-2 text-[0.875rem] font-medium transition-colors",
-                  active ? "text-navy-900" : "text-slate hover:text-navy-900",
+                  "relative block rounded-sm px-2.5 py-2 text-[0.8125rem] font-medium tracking-wide transition-colors 2xl:text-[0.875rem]",
+                  active ? "text-heading" : "text-slate hover:text-heading",
                 )}
               >
                 {item.label}
-                {active && <span className="absolute inset-x-2.5 -bottom-[0.9rem] h-0.5 bg-gold" aria-hidden="true" />}
+                {active && <span className="absolute inset-x-2.5 -bottom-0.5 h-px bg-gold" aria-hidden="true" />}
               </Link>
             </li>
           );
@@ -86,7 +86,7 @@ export function MobileNav({ phone, phoneDisplay }: { phone: string; phoneDisplay
       <button
         ref={triggerRef}
         type="button"
-        className="inline-flex h-11 w-11 items-center justify-center rounded-sm text-navy-800 hover:bg-sand"
+        className="inline-flex h-11 w-11 items-center justify-center rounded-sm text-heading hover:bg-white/10"
         aria-expanded={open}
         aria-controls="mobile-nav"
         onClick={() => setOpen(true)}
@@ -145,7 +145,7 @@ export function MobileNav({ phone, phoneDisplay }: { phone: string; phoneDisplay
               <Link
                 href="/list-your-property"
                 onClick={() => setOpen(false)}
-                className="flex min-h-12 items-center justify-center rounded-[var(--radius-control)] bg-gold font-semibold text-navy-900"
+                className="flex min-h-12 items-center justify-center rounded-[var(--radius-control)] bg-gold font-semibold text-navy-950"
               >
                 List Your Property
               </Link>

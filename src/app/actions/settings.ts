@@ -49,7 +49,7 @@ const SCHEMAS = {
     business_hours: text(160),
   }),
   social: z.object({ facebook: url, instagram: url, x: url, linkedin: url, youtube: url, tiktok: url }),
-  brand: z.object({ logo_url: url, logo_white_url: url }),
+  brand: z.object({ logo_url: url, logo_white_url: url, hero_image_url: url }),
   seo: z.object({
     default_title: req(70),
     default_description: req(170),
@@ -77,9 +77,13 @@ const SCHEMAS = {
       latest_hour: int(8, 22),
       min_notice_hours: int(0, 168),
       max_days_ahead: int(1, 365),
+      allow_saturdays: bool,
+      saturday_earliest_hour: int(6, 20),
+      saturday_latest_hour: int(8, 22),
       allow_sundays: bool,
     })
-    .refine((v) => v.latest_hour > v.earliest_hour, { message: "Latest hour must be after earliest hour", path: ["latest_hour"] }),
+    .refine((v) => v.latest_hour > v.earliest_hour, { message: "Closing hour must be after opening hour", path: ["latest_hour"] })
+    .refine((v) => v.saturday_latest_hour > v.saturday_earliest_hour, { message: "Closing hour must be after opening hour", path: ["saturday_latest_hour"] }),
   uploads: z.object({
     image_max_mb: int(1, 50),
     video_max_mb: int(10, 5000),

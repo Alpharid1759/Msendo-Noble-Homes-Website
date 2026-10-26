@@ -7,7 +7,7 @@ export default function PropertiesLoading() {
         <div className="hidden h-[32rem] animate-pulse rounded-[var(--radius-card)] bg-sand lg:block" />
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className="overflow-hidden rounded-[var(--radius-card)] border border-line bg-white">
+            <div key={i} className="overflow-hidden rounded-[var(--radius-card)] border border-line bg-surface">
               <div className="aspect-[4/3] animate-pulse bg-sand" />
               <div className="space-y-3 p-5">
                 <div className="h-5 w-1/2 animate-pulse rounded bg-sand" />

@@ -84,7 +84,7 @@ export function EnquiryForm({
             ["email", "Email"],
           ].map(([value, label]) => (
             <label key={value} className="inline-flex min-h-10 items-center gap-2 text-sm">
-              <input type="radio" name="preferred_contact" value={value} defaultChecked={v.preferred_contact === value} className="h-4 w-4 accent-navy-800" />
+              <input type="radio" name="preferred_contact" value={value} defaultChecked={v.preferred_contact === value} className="h-4 w-4 accent-gold" />
               {label}
             </label>
           ))}

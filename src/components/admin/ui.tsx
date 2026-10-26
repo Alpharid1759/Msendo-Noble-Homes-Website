@@ -49,9 +49,9 @@ export function StatCard({ label, value, href, hint }: { label: string; value: n
 const PILL_TONES: Record<string, string> = {
   neutral: "bg-sand text-slate",
   info: "bg-navy-100 text-navy-800",
-  success: "bg-[#e5f2eb] text-success",
-  warning: "bg-[#fff1d6] text-warning",
-  danger: "bg-[#fbe7e5] text-danger",
+  success: "bg-success/10 text-success",
+  warning: "bg-warning/15 text-warning",
+  danger: "bg-danger/10 text-danger",
   dark: "bg-navy-800 text-white",
 };
 
@@ -128,9 +128,9 @@ export function EmptyState({ title, children }: { title: string; children?: Reac
 export function Notice({ tone = "info", children }: { tone?: "info" | "success" | "warning" | "danger"; children: ReactNode }) {
   const cls = {
     info: "border-navy-200 bg-navy-100 text-navy-900",
-    success: "border-success/30 bg-[#e9f4ee] text-success",
-    warning: "border-warning/30 bg-[#fff6e5] text-warning",
-    danger: "border-danger/30 bg-[#fbeeed] text-danger",
+    success: "border-success/30 bg-success/10 text-success",
+    warning: "border-warning/30 bg-warning/10 text-warning",
+    danger: "border-danger/30 bg-danger/10 text-danger",
   }[tone];
   return (
     <div role={tone === "danger" ? "alert" : "status"} className={clsx("rounded-[var(--radius-control)] border px-4 py-3 text-sm", cls)}>
@@ -145,4 +145,4 @@ export const adminBtn =
 export const adminBtnPrimary = `${adminBtn} bg-navy-800 text-white hover:bg-navy-700`;
 export const adminBtnSecondary = `${adminBtn} border border-navy-800 bg-white text-navy-800 hover:bg-navy-100`;
 export const adminBtnGhost = `${adminBtn} text-navy-800 hover:bg-sand`;
-export const adminBtnDanger = `${adminBtn} border border-danger/40 bg-white text-danger hover:bg-[#fbeeed]`;
+export const adminBtnDanger = `${adminBtn} border border-danger/40 bg-white text-danger hover:bg-danger/10`;

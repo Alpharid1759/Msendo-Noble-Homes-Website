@@ -42,7 +42,7 @@ export function NewsletterForm({ tone = "dark" }: { tone?: "dark" | "light" }) {
               : "field-input"
           }
         />
-        <SubmitButton pendingLabel="Subscribing" className={onDark ? "bg-gold text-navy-900 hover:bg-[#cdb27f]" : ""}>
+        <SubmitButton pendingLabel="Subscribing" className={onDark ? "bg-gold text-navy-950 hover:bg-[#cdb27f]" : ""}>
           Subscribe
         </SubmitButton>
       </div>

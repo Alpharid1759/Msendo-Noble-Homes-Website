@@ -135,7 +135,7 @@ export async function POST(request: Request) {
 
     let processed;
     try {
-      processed = await processImage(buffer, body.kind === "poster" ? [400, 800, 1600] : undefined);
+      processed = await processImage(buffer, body.kind === "blog-image" ? [800, 1600, 2400] : undefined);
     } catch (e) {
       await removeRaw();
       return fail(e instanceof Error ? e.message : "This image could not be processed.");
@@ -162,7 +162,7 @@ export async function POST(request: Request) {
     }
 
     if (body.kind === "blog-image") {
-      return NextResponse.json({ ok: true, url: publicMediaUrl(variants["1600"] ?? variants["800"]), variants });
+      return NextResponse.json({ ok: true, url: publicMediaUrl(variants["2400"] ?? variants["1600"] ?? variants["800"]), variants });
     }
 
     const { data: asset, error } = await service

@@ -39,7 +39,7 @@ export default async function AboutPage() {
 
       <section className="container-page grid gap-12 py-16 lg:grid-cols-[1fr_1fr]">
         <div>
-          <h2 className="display text-[2.25rem] text-navy-900">Who we are</h2>
+          <h2 className="display text-[2.25rem] text-heading">Who we are</h2>
           <div className="mt-4 space-y-4 text-[1.0625rem] leading-relaxed">
             <p>
               We help buyers, tenants, investors, landlords, developers and corporate clients find, let, manage and invest in
@@ -53,22 +53,22 @@ export default async function AboutPage() {
           </div>
         </div>
         <div className="space-y-8">
-          <div className="rounded-[var(--radius-card)] border border-line bg-white p-6">
+          <div className="rounded-[var(--radius-card)] border border-line bg-surface p-6">
             <h2 className="text-sm font-semibold text-gold-ink">Our mission</h2>
-            <p className="display mt-2 text-[1.5rem] leading-snug text-navy-900">{ABOUT.mission.value}</p>
+            <p className="display mt-2 text-[1.5rem] leading-snug text-heading">{ABOUT.mission.value}</p>
             <DraftNote approved={ABOUT.mission.approved} />
           </div>
-          <div className="rounded-[var(--radius-card)] border border-line bg-white p-6">
+          <div className="rounded-[var(--radius-card)] border border-line bg-surface p-6">
             <h2 className="text-sm font-semibold text-gold-ink">Our vision</h2>
-            <p className="display mt-2 text-[1.5rem] leading-snug text-navy-900">{ABOUT.vision.value}</p>
+            <p className="display mt-2 text-[1.5rem] leading-snug text-heading">{ABOUT.vision.value}</p>
             <DraftNote approved={ABOUT.vision.approved} />
           </div>
         </div>
       </section>
 
-      <section className="border-y border-line bg-white py-16">
+      <section className="border-y border-line bg-surface py-16">
         <div className="container-page">
-          <h2 className="display text-[2.25rem] text-navy-900">What we value</h2>
+          <h2 className="display text-[2.25rem] text-heading">What we value</h2>
           <DraftNote approved={ABOUT.values.approved} />
           <dl className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {ABOUT.values.value.map((v) => (
@@ -82,7 +82,7 @@ export default async function AboutPage() {
       </section>
 
       <section className="container-page py-16">
-        <h2 className="display text-[2.25rem] text-navy-900">What we cover</h2>
+        <h2 className="display text-[2.25rem] text-heading">What we cover</h2>
         <p className="mt-2 max-w-2xl text-slate">
           Our primary market is Abuja and the Federal Capital Territory. We plan to extend our services to other Nigerian
           cities as the business grows.
@@ -117,7 +117,7 @@ export default async function AboutPage() {
 
       {ABOUT.leadership.value.length > 0 && (
         <section className="container-page py-16">
-          <h2 className="display text-[2.25rem] text-navy-900">Leadership</h2>
+          <h2 className="display text-[2.25rem] text-heading">Leadership</h2>
           <ul className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {ABOUT.leadership.value.map((p) => (
               <li key={p.name}>
@@ -132,7 +132,7 @@ export default async function AboutPage() {
 
       {ABOUT.milestones.value.length > 0 && (
         <section className="container-page py-16">
-          <h2 className="display text-[2.25rem] text-navy-900">Milestones</h2>
+          <h2 className="display text-[2.25rem] text-heading">Milestones</h2>
           <ol className="mt-8 space-y-4">
             {ABOUT.milestones.value.map((m) => (
               <li key={m.year} className="flex gap-6">
@@ -145,9 +145,9 @@ export default async function AboutPage() {
       )}
 
       <section className="container-page py-16">
-        <div className="flex flex-col items-start gap-6 rounded-[var(--radius-card)] border border-line bg-white p-8 md:flex-row md:items-center md:justify-between md:p-10">
+        <div className="flex flex-col items-start gap-6 rounded-[var(--radius-card)] border border-line bg-surface p-8 md:flex-row md:items-center md:justify-between md:p-10">
           <div>
-            <h2 className="display text-[2rem] text-navy-900">Visit us in Jabi</h2>
+            <h2 className="display text-[2rem] text-heading">Visit us in Jabi</h2>
             <p className="mt-2 text-slate">
               {contact.address_line}, {contact.city}. Call {contact.phone_display} before you come so the right person is
               available.

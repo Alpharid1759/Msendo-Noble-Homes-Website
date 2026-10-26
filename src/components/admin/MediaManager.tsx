@@ -232,7 +232,7 @@ export function MediaManager({
   return (
     <div className="space-y-6">
       {message && (
-        <p role={message.tone === "error" ? "alert" : "status"} className={clsx("rounded-[var(--radius-control)] px-4 py-2.5 text-sm", message.tone === "error" ? "bg-[#fbeeed] text-danger" : "bg-[#e9f4ee] text-success")}>
+        <p role={message.tone === "error" ? "alert" : "status"} className={clsx("rounded-[var(--radius-control)] px-4 py-2.5 text-sm", message.tone === "error" ? "bg-danger/10 text-danger" : "bg-success/10 text-success")}>
           {message.text}
         </p>
       )}

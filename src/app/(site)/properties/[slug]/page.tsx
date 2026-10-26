@@ -154,7 +154,7 @@ export default async function PropertyPage({ params }: Props) {
         />
 
         {!property.is_listed && (
-          <div role="status" className="mt-6 flex gap-3 rounded-[var(--radius-card)] border border-navy-200 bg-navy-100 p-4 text-navy-900">
+          <div role="status" className="mt-6 flex gap-3 rounded-[var(--radius-card)] border border-navy-200 bg-sand p-4 text-heading">
             <CircleAlert className="mt-0.5 h-5 w-5 shrink-0" aria-hidden="true" />
             <div>
               <p className="font-semibold">This property is {STATUS_LABEL[property.status].toLowerCase()} and no longer available.</p>
@@ -170,7 +170,7 @@ export default async function PropertyPage({ params }: Props) {
         )}
 
         {property.is_demo && (
-          <p role="note" className="mt-6 rounded-[var(--radius-card)] border border-danger/30 bg-[#fdf0ef] p-4 text-sm text-danger">
+          <p role="note" className="mt-6 rounded-[var(--radius-card)] border border-danger/30 bg-danger/10 p-4 text-sm text-danger">
             Demonstration listing for testing the website. It is not a real property offer.
           </p>
         )}
@@ -182,7 +182,7 @@ export default async function PropertyPage({ params }: Props) {
               <StatusBadge status={property.status} />
               {property.is_featured && <FlagBadge>Featured</FlagBadge>}
             </div>
-            <h1 className="display mt-3 text-[2rem] text-navy-900 md:text-[2.75rem]">{property.title}</h1>
+            <h1 className="display mt-3 text-[2rem] text-heading md:text-[2.75rem]">{property.title}</h1>
             {location && (
               <p className="mt-2 inline-flex items-center gap-1.5 text-slate">
                 <MapPin className="h-4 w-4 text-gold-ink" aria-hidden="true" />
@@ -221,7 +221,7 @@ export default async function PropertyPage({ params }: Props) {
 
             {property.description && (
               <section aria-labelledby="description">
-                <h2 id="description" className="display text-[1.75rem] text-navy-900">
+                <h2 id="description" className="display text-[1.75rem] text-heading">
                   About this property
                 </h2>
                 <div className="mt-4 space-y-4 text-[1.0625rem] leading-relaxed text-charcoal">
@@ -236,7 +236,7 @@ export default async function PropertyPage({ params }: Props) {
 
             {videos.length > 0 && (
               <section aria-labelledby="video-tour">
-                <h2 id="video-tour" className="display text-[1.75rem] text-navy-900">
+                <h2 id="video-tour" className="display text-[1.75rem] text-heading">
                   Video tour
                 </h2>
                 <div className="mt-4 space-y-6">
@@ -263,11 +263,11 @@ export default async function PropertyPage({ params }: Props) {
 
             {property.virtual_tour_url && (
               <section aria-labelledby="virtual-tour">
-                <h2 id="virtual-tour" className="display text-[1.75rem] text-navy-900">
+                <h2 id="virtual-tour" className="display text-[1.75rem] text-heading">
                   Virtual tour
                 </h2>
                 <p className="mt-3">
-                  <a href={property.virtual_tour_url} target="_blank" rel="noopener noreferrer" className="font-semibold text-navy-700 underline underline-offset-2">
+                  <a href={property.virtual_tour_url} target="_blank" rel="noopener noreferrer" className="font-semibold text-accent underline underline-offset-2">
                     Open the 3D virtual tour in a new tab
                   </a>
                 </p>
@@ -275,7 +275,7 @@ export default async function PropertyPage({ params }: Props) {
             )}
 
             <section aria-labelledby="details">
-              <h2 id="details" className="display text-[1.75rem] text-navy-900">
+              <h2 id="details" className="display text-[1.75rem] text-heading">
                 Property details
               </h2>
               <dl className="mt-4 grid gap-x-8 sm:grid-cols-2">
@@ -290,7 +290,7 @@ export default async function PropertyPage({ params }: Props) {
 
             {property.amenities.length > 0 && (
               <section aria-labelledby="amenities">
-                <h2 id="amenities" className="display text-[1.75rem] text-navy-900">
+                <h2 id="amenities" className="display text-[1.75rem] text-heading">
                   Amenities and facilities
                 </h2>
                 <ul className="mt-4 grid gap-x-8 gap-y-2.5 sm:grid-cols-2">
@@ -305,10 +305,10 @@ export default async function PropertyPage({ params }: Props) {
             )}
 
             <section aria-labelledby="costs">
-              <h2 id="costs" className="display text-[1.75rem] text-navy-900">
+              <h2 id="costs" className="display text-[1.75rem] text-heading">
                 {isSale ? "Price and charges" : "Rent and other charges"}
               </h2>
-              <div className="mt-4 overflow-hidden rounded-[var(--radius-card)] border border-line bg-white">
+              <div className="mt-4 overflow-hidden rounded-[var(--radius-card)] border border-line bg-surface">
                 <table className="w-full text-left text-[0.9375rem]">
                   <caption className="sr-only">Charges for {property.reference}</caption>
                   <thead className="bg-sand text-sm text-slate">
@@ -360,10 +360,10 @@ export default async function PropertyPage({ params }: Props) {
 
             {(property.title_document || isSale) && (
               <section aria-labelledby="documents">
-                <h2 id="documents" className="display text-[1.75rem] text-navy-900">
+                <h2 id="documents" className="display text-[1.75rem] text-heading">
                   Title and documents
                 </h2>
-                <div className="mt-4 flex gap-3 rounded-[var(--radius-card)] border border-line bg-white p-5">
+                <div className="mt-4 flex gap-3 rounded-[var(--radius-card)] border border-line bg-surface p-5">
                   {property.title_verified ? (
                     <BadgeCheck className="h-6 w-6 shrink-0 text-success" aria-hidden="true" />
                   ) : (
@@ -379,7 +379,7 @@ export default async function PropertyPage({ params }: Props) {
                     {!property.title_verified && (
                       <Link
                         href={`/contact?category=verification_request&ref=${property.reference}`}
-                        className="mt-2 inline-block text-sm font-semibold text-navy-700 underline underline-offset-2"
+                        className="mt-2 inline-block text-sm font-semibold text-accent underline underline-offset-2"
                       >
                         Request document verification
                       </Link>
@@ -390,7 +390,7 @@ export default async function PropertyPage({ params }: Props) {
             )}
 
             <section aria-labelledby="location">
-              <h2 id="location" className="display text-[1.75rem] text-navy-900">
+              <h2 id="location" className="display text-[1.75rem] text-heading">
                 Location
               </h2>
               <p className="mt-3 text-charcoal">
@@ -415,14 +415,14 @@ export default async function PropertyPage({ params }: Props) {
                 href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapsQuery)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-3 inline-block text-sm font-semibold text-navy-700 underline underline-offset-2"
+                className="mt-3 inline-block text-sm font-semibold text-accent underline underline-offset-2"
               >
                 {hasPin ? "Open in Google Maps" : `View ${property.district_name ?? "the area"} on Google Maps`}
               </a>
             </section>
 
-            <section id="enquire" aria-labelledby="enquire-heading" className="scroll-mt-24 rounded-[var(--radius-card)] border border-line bg-white p-6 md:p-8 no-print">
-              <h2 id="enquire-heading" className="display text-[1.75rem] text-navy-900">
+            <section id="enquire" aria-labelledby="enquire-heading" className="scroll-mt-24 rounded-[var(--radius-card)] border border-line bg-surface p-6 md:p-8 no-print">
+              <h2 id="enquire-heading" className="display text-[1.75rem] text-heading">
                 Enquire about this property
               </h2>
               <p className="mt-2 text-slate">We aim to respond within one working day. Ref {property.reference} is attached automatically.</p>
@@ -438,8 +438,8 @@ export default async function PropertyPage({ params }: Props) {
             </section>
 
             {property.is_listed && (
-              <section id="inspection" aria-labelledby="inspection-heading" className="scroll-mt-24 rounded-[var(--radius-card)] border border-line bg-white p-6 md:p-8 no-print">
-                <h2 id="inspection-heading" className="display text-[1.75rem] text-navy-900">
+              <section id="inspection" aria-labelledby="inspection-heading" className="scroll-mt-24 rounded-[var(--radius-card)] border border-line bg-surface p-6 md:p-8 no-print">
+                <h2 id="inspection-heading" className="display text-[1.75rem] text-heading">
                   Book an inspection
                 </h2>
                 <p className="mt-2 text-slate">Pick a preferred time. Our team will call you to confirm it.</p>
@@ -451,11 +451,11 @@ export default async function PropertyPage({ params }: Props) {
 
             <p className="text-sm text-slate no-print">
               Something wrong with this listing?{" "}
-              <Link href={`/contact?category=report_listing&ref=${property.reference}`} className="font-semibold text-navy-700 underline underline-offset-2">
+              <Link href={`/contact?category=report_listing&ref=${property.reference}`} className="font-semibold text-accent underline underline-offset-2">
                 Report it to our team
               </Link>
               . Information is provided in good faith; read our{" "}
-              <Link href="/legal/listing-disclaimer" className="font-semibold text-navy-700 underline underline-offset-2">
+              <Link href="/legal/listing-disclaimer" className="font-semibold text-accent underline underline-offset-2">
                 listing disclaimer
               </Link>
               .
@@ -463,7 +463,7 @@ export default async function PropertyPage({ params }: Props) {
           </div>
 
           <aside className="lg:sticky lg:top-24 lg:self-start no-print" aria-label="Contact about this property">
-            <div className="rounded-[var(--radius-card)] border border-line bg-white p-5">
+            <div className="rounded-[var(--radius-card)] border border-line bg-surface p-5">
               <Price
                 price={property.price}
                 price_on_request={property.price_on_request}
@@ -488,10 +488,10 @@ export default async function PropertyPage({ params }: Props) {
         {similar.length > 0 && (
           <section aria-labelledby="similar" className="mt-20 no-print">
             <div className="flex items-end justify-between gap-4">
-              <h2 id="similar" className="display text-[2rem] text-navy-900">
+              <h2 id="similar" className="display text-[2rem] text-heading">
                 Similar properties
               </h2>
-              <Link href={listHref} className="text-sm font-semibold text-navy-700 underline underline-offset-2">
+              <Link href={listHref} className="text-sm font-semibold text-accent underline underline-offset-2">
                 See all {isSale ? "for sale" : "for rent"}
               </Link>
             </div>

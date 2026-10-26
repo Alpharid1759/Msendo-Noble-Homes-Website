@@ -50,7 +50,7 @@ export default async function BlogIndex({ searchParams }: Props) {
           <nav aria-label="Article categories" className="-mx-1 overflow-x-auto">
             <ul className="flex min-w-max gap-1 px-1">
               <li>
-                <Link href="/blog" aria-current={!category ? "page" : undefined} className={clsx("inline-flex min-h-10 items-center rounded-[var(--radius-control)] px-3 text-sm font-semibold", !category ? "bg-navy-800 text-white" : "text-navy-800 hover:bg-sand")}>
+                <Link href="/blog" aria-current={!category ? "page" : undefined} className={clsx("inline-flex min-h-10 items-center rounded-[var(--radius-control)] px-3 text-sm font-semibold", !category ? "bg-navy-800 text-white" : "text-accent hover:bg-sand")}>
                   All
                 </Link>
               </li>
@@ -59,7 +59,7 @@ export default async function BlogIndex({ searchParams }: Props) {
                   <Link
                     href={`/blog?category=${c.slug}`}
                     aria-current={category === c.slug ? "page" : undefined}
-                    className={clsx("inline-flex min-h-10 items-center rounded-[var(--radius-control)] px-3 text-sm font-semibold", category === c.slug ? "bg-navy-800 text-white" : "text-navy-800 hover:bg-sand")}
+                    className={clsx("inline-flex min-h-10 items-center rounded-[var(--radius-control)] px-3 text-sm font-semibold", category === c.slug ? "bg-navy-800 text-white" : "text-accent hover:bg-sand")}
                   >
                     {c.name}
                   </Link>
@@ -82,14 +82,14 @@ export default async function BlogIndex({ searchParams }: Props) {
         {tag && (
           <p className="mt-6 text-sm">
             Showing articles tagged <strong>{tag}</strong>.{" "}
-            <Link href={qs({ tag: undefined, page: undefined })} className="font-semibold text-navy-700 underline">
+            <Link href={qs({ tag: undefined, page: undefined })} className="font-semibold text-accent underline">
               Clear tag
             </Link>
           </p>
         )}
 
         {posts.items.length === 0 ? (
-          <div className="mt-10 rounded-[var(--radius-card)] border border-dashed border-navy-200 bg-white p-10 text-center">
+          <div className="mt-10 rounded-[var(--radius-card)] border border-dashed border-navy-200 bg-surface p-10 text-center">
             <h2 className="text-lg font-semibold">{q || category || tag ? "No articles match" : "Articles are on the way"}</h2>
             <p className="mt-2 text-slate">
               {q || category || tag ? "Try another search or category." : "Subscribe to the newsletter in the footer to hear when we publish."}

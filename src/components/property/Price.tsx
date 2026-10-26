@@ -20,7 +20,7 @@ export function Price({
 }) {
   const p = formatPrice({ price, price_on_request, currency, billing_frequency });
   return (
-    <p className={clsx("text-navy-900", className)}>
+    <p className={clsx("text-heading", className)}>
       <span
         className={clsx(
           "font-bold tabular-nums",

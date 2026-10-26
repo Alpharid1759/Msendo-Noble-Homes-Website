@@ -18,7 +18,7 @@ interface Props {
 }
 
 const ctl =
-  "h-11 w-full rounded-[var(--radius-control)] border border-line bg-white px-3 text-[0.9375rem] focus:border-navy-700 focus:outline-none focus:ring-2 focus:ring-navy-700/20";
+  "h-11 w-full rounded-[var(--radius-control)] border border-line bg-surface px-3 text-[0.9375rem] focus:border-accent focus:outline-none focus:ring-2 focus:ring-navy-700/20";
 
 function Select({ id, name, label, value, options, placeholder }: { id: string; name: string; label: string; value?: string | number; options: { value: string; label: string }[]; placeholder: string }) {
   return (
@@ -180,12 +180,12 @@ function FilterFields({ scope, filters, categories, locations, idPrefix }: Omit<
       <div className="space-y-2.5">
         {scope !== "rent" && (
           <label className="flex items-center gap-2.5 text-sm">
-            <input type="checkbox" name="verified" value="1" defaultChecked={filters.verified === "1"} className="h-4 w-4 accent-navy-800" />
+            <input type="checkbox" name="verified" value="1" defaultChecked={filters.verified === "1"} className="h-4 w-4 accent-gold" />
             Title documents verified by our team
           </label>
         )}
         <label className="flex items-center gap-2.5 text-sm">
-          <input type="checkbox" name="featured" value="1" defaultChecked={filters.featured === "1"} className="h-4 w-4 accent-navy-800" />
+          <input type="checkbox" name="featured" value="1" defaultChecked={filters.featured === "1"} className="h-4 w-4 accent-gold" />
           Featured listings only
         </label>
       </div>
@@ -232,7 +232,7 @@ export function ListingFilters(props: Props) {
           type="button"
           onClick={() => setOpen(true)}
           aria-expanded={open}
-          className="inline-flex min-h-11 items-center gap-2 rounded-[var(--radius-control)] border border-navy-800 bg-white px-4 text-sm font-semibold text-navy-800"
+          className="inline-flex min-h-11 items-center gap-2 rounded-[var(--radius-control)] border border-accent bg-surface px-4 text-sm font-semibold text-accent"
         >
           <SlidersHorizontal className="h-4 w-4" aria-hidden="true" />
           Filters{activeCount > 0 ? ` (${activeCount})` : ""}
@@ -254,8 +254,8 @@ export function ListingFilters(props: Props) {
               <div className="flex-1 overflow-y-auto px-5 py-5">
                 <FilterFields {...props} idPrefix={`m${uid}`} />
               </div>
-              <div className="flex gap-3 border-t border-line bg-white px-5 py-4">
-                <Link href={basePath} className="inline-flex min-h-12 flex-1 items-center justify-center rounded-[var(--radius-control)] border border-navy-800 font-semibold text-navy-800">
+              <div className="flex gap-3 border-t border-line bg-surface px-5 py-4">
+                <Link href={basePath} className="inline-flex min-h-12 flex-1 items-center justify-center rounded-[var(--radius-control)] border border-accent font-semibold text-accent">
                   Reset
                 </Link>
                 <button type="submit" data-track="search_filters_applied" className="inline-flex min-h-12 flex-[2] items-center justify-center rounded-[var(--radius-control)] bg-navy-800 font-semibold text-white">
@@ -268,11 +268,11 @@ export function ListingFilters(props: Props) {
       )}
 
       <aside className="hidden lg:block" aria-label="Filter properties">
-        <form action={basePath} method="get" onSubmit={stripEmpty} className="sticky top-24 rounded-[var(--radius-card)] border border-line bg-white p-5">
+        <form action={basePath} method="get" onSubmit={stripEmpty} className="sticky top-24 rounded-[var(--radius-card)] border border-line bg-surface p-5">
           <div className="mb-5 flex items-center justify-between">
             <h2 className="text-base font-semibold">Filters</h2>
             {activeCount > 0 && (
-              <Link href={basePath} className="text-sm font-semibold text-navy-700 underline underline-offset-2">
+              <Link href={basePath} className="text-sm font-semibold text-accent underline underline-offset-2">
                 Reset all
               </Link>
             )}

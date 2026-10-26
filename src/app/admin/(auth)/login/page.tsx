@@ -19,7 +19,7 @@ export default async function LoginPage({ searchParams }: Props) {
         {isSupabaseConfigured() ? (
           <LoginForm next={next} linkError={sp.error === "link"} />
         ) : (
-          <p role="alert" className="rounded-[var(--radius-control)] bg-[#fff6e5] px-4 py-3 text-sm text-warning">
+          <p role="alert" className="rounded-[var(--radius-control)] bg-warning/10 px-4 py-3 text-sm text-warning">
             Supabase is not configured. Add the environment variables described in docs/DEPLOYMENT.md, then restart the app.
           </p>
         )}

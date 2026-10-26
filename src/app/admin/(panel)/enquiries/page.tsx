@@ -130,7 +130,7 @@ export default async function EnquiriesPage({ searchParams }: Props) {
             {rows.map((e) => {
               const overdue = e.follow_up_at && new Date(e.follow_up_at) < new Date() && !["converted", "closed", "spam"].includes(e.status);
               return (
-                <tr key={e.id} className={e.status === "new" ? "bg-[#fffaf0]" : "hover:bg-ivory"}>
+                <tr key={e.id} className={e.status === "new" ? "bg-gold/5" : "hover:bg-ivory"}>
                   <Td>
                     <Link href={`/admin/enquiries/${e.id}`} className="font-semibold text-navy-900 hover:underline">
                       {e.full_name}

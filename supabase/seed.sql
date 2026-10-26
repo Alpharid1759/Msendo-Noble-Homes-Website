@@ -151,12 +151,12 @@ insert into public.site_settings (key, value, is_public, description) values
       'state', 'Federal Capital Territory',
       'country', 'Nigeria',
       'maps_url', 'https://www.google.com/maps/search/?api=1&query=Plot+833+Emmanuel+Aguna+Jabi+Abuja',
-      'business_hours', null
+      'business_hours', 'Monday to Friday, 7:00am to 5:00pm. Saturday, 10:00am to 4:00pm. Closed on Sundays.'
     ), true, 'Public contact details'),
   ('social', jsonb_build_object(
       'facebook', null, 'instagram', null, 'x', null, 'linkedin', null, 'youtube', null, 'tiktok', null
     ), true, 'Social profile URLs'),
-  ('brand', jsonb_build_object('logo_url', null, 'logo_white_url', null), true, 'Logo files'),
+  ('brand', jsonb_build_object('logo_url', null, 'logo_white_url', null, 'hero_image_url', null), true, 'Logo files'),
   ('seo', jsonb_build_object(
       'default_title', 'Msendo Noble Homes | Property for Sale and Rent in Abuja',
       'default_description', 'Find houses, apartments, land, offices and commercial property for sale and rent in Abuja with Msendo Noble Homes, the real estate division of Msendo Integrated Limited.',
@@ -170,7 +170,8 @@ insert into public.site_settings (key, value, is_public, description) values
       'enquiry_retention_months', 24
     ), true, 'Privacy and consent'),
   ('inspections', jsonb_build_object(
-      'slot_minutes', 60, 'earliest_hour', 9, 'latest_hour', 17,
+      'slot_minutes', 60, 'earliest_hour', 7, 'latest_hour', 17,
+      'allow_saturdays', true, 'saturday_earliest_hour', 10, 'saturday_latest_hour', 16,
       'min_notice_hours', 24, 'max_days_ahead', 60, 'allow_sundays', false
     ), true, 'Inspection booking rules'),
   ('testimonials', jsonb_build_object('items', jsonb_build_array()), true, 'Customer testimonials published with permission'),

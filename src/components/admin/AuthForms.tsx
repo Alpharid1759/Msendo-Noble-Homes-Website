@@ -13,7 +13,7 @@ export function LoginForm({ next, linkError }: { next: string; linkError: boolea
     <form action={action} className="space-y-4">
       <input type="hidden" name="next" value={next} />
       {linkError && state.status === "idle" && (
-        <p role="alert" className="rounded-[var(--radius-control)] bg-[#fbeeed] px-4 py-3 text-sm text-danger">
+        <p role="alert" className="rounded-[var(--radius-control)] bg-danger/10 px-4 py-3 text-sm text-danger">
           That link has expired or was already used. Request a new one.
         </p>
       )}

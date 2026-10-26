@@ -58,7 +58,7 @@ export function PhotoGallery({ images, title }: { images: LightboxImage[]; title
         <button
           type="button"
           onClick={() => setOpen(0)}
-          className="mt-3 inline-flex min-h-10 items-center gap-2 rounded-[var(--radius-control)] border border-line bg-white px-4 text-sm font-semibold text-navy-800 hover:bg-sand"
+          className="mt-3 inline-flex min-h-10 items-center gap-2 rounded-[var(--radius-control)] border border-line bg-surface px-4 text-sm font-semibold text-accent hover:bg-sand"
         >
           <Images className="h-4 w-4" aria-hidden="true" />
           View all {images.length} photos

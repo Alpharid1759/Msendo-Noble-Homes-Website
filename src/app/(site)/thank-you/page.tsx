@@ -42,15 +42,15 @@ export default async function ThankYouPage({ searchParams }: Props) {
     <div className="container-page flex min-h-[60vh] max-w-2xl flex-col items-center justify-center py-20 text-center">
       {!duplicate && <TrackView event={copy.event} params={{ property_reference: ref }} />}
       <CheckCircle2 className="h-14 w-14 text-success" aria-hidden="true" />
-      <h1 className="display mt-6 text-[2.25rem] text-navy-900 md:text-[2.75rem]">{copy.title}</h1>
+      <h1 className="display mt-6 text-[2.25rem] text-heading md:text-[2.75rem]">{copy.title}</h1>
       {ref && <p className="mt-2 font-semibold text-slate">Property reference {ref}</p>}
       <p className="mt-4 text-lg leading-relaxed text-slate">
         {duplicate ? "We already have this request from you today, so there is no need to send it again. " : ""}
         {copy.body}
       </p>
       <p className="mt-4 text-slate">
-        Need us sooner? Call <a href={`tel:${settings.contact.phone}`} className="font-semibold text-navy-700 underline">{settings.contact.phone_display}</a> or{" "}
-        <a href={settings.contact.whatsapp_link} target="_blank" rel="noopener noreferrer" className="font-semibold text-navy-700 underline">
+        Need us sooner? Call <a href={`tel:${settings.contact.phone}`} className="font-semibold text-accent underline">{settings.contact.phone_display}</a> or{" "}
+        <a href={settings.contact.whatsapp_link} target="_blank" rel="noopener noreferrer" className="font-semibold text-accent underline">
           message us on WhatsApp
         </a>
         .

@@ -44,7 +44,7 @@ export function VideoPlayer({
           ) : (
             <span className="absolute inset-0 bg-gradient-to-br from-navy-800 to-navy-950" aria-hidden="true" />
           )}
-          <span className="relative inline-flex h-16 w-16 items-center justify-center rounded-full bg-white/95 text-navy-900 shadow-lg transition-transform group-hover:scale-105">
+          <span className="relative inline-flex h-16 w-16 items-center justify-center rounded-full bg-surface/95 text-heading shadow-lg transition-transform group-hover:scale-105">
             <Play className="ml-1 h-7 w-7" aria-hidden="true" />
           </span>
           {durationLabel && (
