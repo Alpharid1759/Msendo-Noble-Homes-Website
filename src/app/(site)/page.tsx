@@ -7,13 +7,13 @@ import { Price } from "@/components/property/Price";
 import { PropertyCard } from "@/components/property/PropertyCard";
 import { PropertyImage } from "@/components/property/PropertyImage";
 import { VideoPlayer } from "@/components/property/VideoPlayer";
-import { HeroIllustration } from "@/components/site/HeroIllustration";
 import { JsonLd } from "@/components/site/JsonLd";
 import { ButtonLink } from "@/components/ui/Button";
 import { CategoryIcon } from "@/components/ui/CategoryIcon";
 import { SERVICES } from "@/content/services";
 import { getBlogPosts } from "@/lib/blog";
 import { publicEnv } from "@/lib/env";
+import { resolveHeroImage } from "@/lib/hero-image";
 import { formatDate, formatLocation } from "@/lib/format";
 import { describeHours } from "@/lib/inspection-rules";
 import {
@@ -81,7 +81,7 @@ export default async function HomePage() {
   const featuredDistricts = locations.filter((l) => l.type === "district" && l.is_featured).slice(0, 8);
   const testimonials = settings.testimonials.items.filter((t) => t.permission_confirmed);
   const { contact } = settings;
-  const heroImage = settings.brand.hero_image_url;
+  const heroImage = resolveHeroImage(settings.brand.hero_image_url);
 
   return (
     <>
@@ -126,16 +126,25 @@ export default async function HomePage() {
       />
 
       <section className="on-dark relative -mt-[5.25rem] overflow-hidden bg-navy-950 text-white">
-        {heroImage ? (
-          <img src={heroImage} alt="" fetchPriority="high" className="absolute inset-0 h-full w-full object-cover" />
-        ) : (
-          <>
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_20%,#1d3a2b_0%,#0a0d0b_60%)]" aria-hidden="true" />
-            <HeroIllustration className="pointer-events-none absolute bottom-0 right-[-10rem] h-[78%] w-auto opacity-60 md:right-[-4rem] lg:right-0 lg:opacity-90" />
-          </>
+        <img
+          src={heroImage.src}
+          srcSet={heroImage.srcSet}
+          sizes="100vw"
+          alt=""
+          fetchPriority="high"
+          className="absolute inset-0 h-full w-full object-cover object-[60%_center]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#050706]/85 via-[#050706]/45 to-[#050706]/10" aria-hidden="true" />
+        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#050706]/70 to-transparent" aria-hidden="true" />
+        <div className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-[#0e1210] via-[#0e1210]/60 to-transparent" aria-hidden="true" />
+        {heroImage.credit && (
+          <p className="absolute bottom-48 right-4 z-[1] hidden text-[0.6875rem] text-white/55 md:block">
+            Photo:{" "}
+            <a href={heroImage.creditUrl ?? undefined} target="_blank" rel="noopener noreferrer" className="underline-offset-2 hover:text-white hover:underline">
+              {heroImage.credit} on Unsplash
+            </a>
+          </p>
         )}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#050706]/90 via-[#050706]/55 to-transparent" aria-hidden="true" />
-        <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#0e1210] to-transparent" aria-hidden="true" />
         <div className="container-page relative pb-56 pt-40 md:pb-64 md:pt-48 lg:pt-52">
           <p className="flex items-center gap-3 text-sm font-semibold tracking-[0.18em] text-gold-light">
             <span className="h-px w-10 bg-gold" aria-hidden="true" />
@@ -464,7 +473,7 @@ export default async function HomePage() {
 
       <section aria-labelledby="cta-heading" className="container-page pb-16 md:pb-24">
         <div className="relative overflow-hidden rounded-[16px] border border-gold/25 bg-navy-950 px-6 py-14 text-center md:px-12">
-          {heroImage && <img src={heroImage} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover opacity-25 blur-[2px]" />}
+          <img src={heroImage.src} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover opacity-25 blur-[2px]" />
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgb(230_162_12/0.14)_0%,transparent_70%)]" aria-hidden="true" />
           <div className="relative">
             <h2 id="cta-heading" className="display text-[2rem] text-[#f6f1e6] md:text-[2.75rem]">
